@@ -1,0 +1,1 @@
+~/bin/buildDMG.pl -buildDir ~/svnWorking/msatFinder/branches/msatCommandGUI/bin -compressionLevel 5 -dmgName msatCommand -internetEnabled /Users/bcf/svnWorking/msatFinder/branches/msatCommandGUI/dist/msatCommand.app 
