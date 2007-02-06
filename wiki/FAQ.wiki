@@ -1,0 +1,17 @@
+#summary Frequently Asked Questions
+#labels Featured
+
+==Does msatCommander work in OS X 10.3?==
+apparently not at the moment.  i will attempt to fix when i have the time.
+
+
+==Will msatCommander work with Chromas files?==
+yes and no.  to use chromas files you will currently need to change the file ending to '.txt' from '.fasta'.
+
+
+
+
+
+
+
+
