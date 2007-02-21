@@ -1,0 +1,21 @@
+#summary Changelog for msatCommander (formerly msatFinder)
+#labels Featured
+
+= 0.4.2 =
+  * slight mod to GUI code
+  * slight mod to output files (column-izing output of start and end bp)
+
+
+= 0.4.1 =
+
+  * it should work correctly (removes Fasta error)
+  * rewrote regex code resulting in 2X speedup
+  * can no longer overwrite input file
+  * results output similar to ephemeris
+
+
+
+
+
+
+
