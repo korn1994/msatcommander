@@ -1,9 +1,17 @@
 #summary Changelog for msatCommander (formerly msatFinder)
 #labels Featured
 
+= 0.4.4 =
+  * allow selection of '.fasta' files in File-Open Dialog (Fixed chromas issue?)
+  * addition of option to output clone name and 'No Repeats Found' (T. Glenn enhancement request)
+
+= 0.4.3 =
+  * universal binary
+
 = 0.4.2 =
   * slight mod to GUI code
   * slight mod to output files (column-izing output of start and end bp)
+  * output files are now CSV
 
 
 = 0.4.1 =
@@ -12,7 +20,6 @@
   * rewrote regex code resulting in 2X speedup
   * can no longer overwrite input file
   * results output similar to ephemeris
-
 
 
 
