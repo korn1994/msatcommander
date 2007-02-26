@@ -19,7 +19,7 @@ not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, B
  
 """
 
-import string, re, wx, time, csv
+import string, re, wx, time, csv, os.path
 from Bio import Fasta
  
 idAbout = wx.NewId()
@@ -29,14 +29,7 @@ idSearch = wx.NewId()
 idConversion = wx.NewId()
 idExit  = wx.NewId()
 idListBox = wx.NewId()
-
-#try:
-#    from Bio import Fasta
-#except:
-#    print "This program requires BioPython (http://biopython.org/) to be installed."
-       
-
-
+      
 class mods: 
     
     """Class representing DNA as a string sequence.""" 
@@ -54,60 +47,54 @@ class mods:
             """return complementary dna sequence"""
 
             tab = string.maketrans('AGCTagct','TCGAtcga')
+            # translate it
             output = string.translate(s, tab)
-            #--------------
-            # new test code
-            #--------------
+            # reverse it
             output = output[::-1]
-            #------------------
-            # end new test code
-            #------------------
             return output
     
 
 class search:
 
     def genericMethod(self,passedSearchClass, repeat):
-        
         """generic method for finding various microsatellite repeats"""
-        
-        #-----------------------------------------------------------------------------
-        # new code to speed things up? - gives speedup of approximately 2X
-        #-----------------------------------------------------------------------------
-
-        compiledRegExPos = 0                                                   # quick and dirty means of indexing position in passedSearchClass
+        # quick and dirty means of indexing position in passedSearchClass
+        compiledRegExPos = 0                                                   
         sLength = len(self.seq)
         for compiledRegEx in passedSearchClass:
             iterator = compiledRegEx.finditer(self.seq)
-            #compIterator = compiledRegEx.finditer(mods().complement(self.seq))
             compIterator = compiledRegEx.finditer(mods().revComplement(self.seq))
             name = repeat + 'Letters'
             i = allRepeatClasses[name][compiledRegExPos]
+            # list to help remove duplicates
+            baseList = []
+            # look for matches in forward sequence
             for match in iterator:
-                bases = match.span()                                                # give start/end bases of repeat
+                bases = match.span()                                                
+                # give start/end bases of repeat
                 length = (bases[1] - bases[0]) / repeatUnits[repeat]
                 self.msatResults[bases[0]+1] = ('%s repeat %s^%s found between bases %s and %s.') % (repeat, i, length, bases[0]+1, bases[1]+1)
-            for match in compIterator:                                              # do the same on the reverse complement of the sequence
+                baseList.append(bases[0])
+            # do the same on the reverse complement of the sequence
+            for match in compIterator:                                              
                 bases = match.span()
-                length = (bases[1] - bases[0]) / repeatUnits[repeat]
-                seq = match.group()
-                #self.msatResults[bases[0]+1] = ('Reverse complement of %s repeat %s, %s^%s found between bases %s and %s.') % (repeat, i, mods().complement(i), length, bases[0]+1, bases[1]+1)
-                i = i.strip('()')
-                self.msatResults[bases[0]+1] = ('Reverse complement of %s repeat %s, (%s)^%s found between bases %s and %s.') % (repeat, i, mods().revComplement(i), length, sLength - bases[1]+1, sLength - bases[0]+1)
+                # add if statement to remove repetitive finds...
+                if sLength - bases[1] not in baseList:
+                    length = (bases[1] - bases[0]) / repeatUnits[repeat]
+                    seq = match.group()            
+                    i = i.strip('()')
+                    self.msatResults[bases[0]+1] = ('Reverse complement of %s repeat %s, (%s)^%s found between bases %s and %s.') % (repeat, i, mods().revComplement(i), length, sLength - bases[1]+1, sLength - bases[0]+1)
             compiledRegExPos+=1
-            
-        #--------------------------------
-        # end new code to speed things up
-        #--------------------------------
 
     def ephemeris(self, s, type):
         
         """Searches for microsatellite sequences (mononucleotide, dinucleotide, trinucleotide, tetranucleotide) in DNA string"""        
         
         self.seq = s
-        self.msatResults={}                                 # we will store output for each repeat in dictionary keyed on start base #
-        
-        if 'All (slow)' in type:                           # moved All (slow!) here to keep from double searching
+        # we will store output for each repeat in dictionary keyed on start base #
+        self.msatResults={}                                 
+        # moved All (slow!) here to keep from double searching
+        if 'All (slow)' in type:                          
             self.genericMethod(mononucleotide, 'mononucleotide')
             self.genericMethod(dinucleotide,'dinucleotide')
             self.genericMethod(trinucleotide,'trinucleotide')
@@ -130,20 +117,22 @@ class search:
                     self.genericMethod(hexanucleotide,'hexanucleotide')
         return self.msatResults
     
-def readInfo(inFile, repeatChoice, outFile):    
+def readInfo(inFile, repeatChoice, outFile, noRepeats):    
     startTime = time.time()
-    file=open(outFile,'w')                                   # opens file for output - append only to keep from overwriting
+    # opens file for output (overwrite existing)
+    file=open(outFile,'w')                                   
     csvWriter = csv.writer(file, dialect = 'excel')
     csvWriter.writerow(['Clone','Repeat Info','Repeat Count','Location','Start BP','','End BP'])
-    #file.write('You searched for all ')
-    #for choice in repeatChoice:
-    #    file.write(('%s ') % (choice))
-    #file.write(' repeats in each sequence\n')
-    #file.write('Microsatellite repeats found in the following sequences: \n\n')
     parser = Fasta.RecordParser()
     infile = open(inFile)
     iterator = Fasta.Iterator(infile, parser)
     i = 0
+    # initialize variable for number of sequence searched
+    sequenceCount = 0
+    # initialize list for sequence containing repeats
+    overallRepeatSequences = []
+    # overall repeats list
+    overallRepeats = []
     while 1:
         record = iterator.next()
         if not record:
@@ -152,14 +141,21 @@ def readInfo(inFile, repeatChoice, outFile):
             file.close()
         dataOut=search().ephemeris(record.sequence, repeatChoice) 
         dictKeys=dataOut.keys()
-        dictKeys.sort()                                     # sorts keys so bp locations will be in order
+        # sorts keys so bp locations will be in order by clone name
+        dictKeys.sort()                                    
         if dictKeys:
-            for k in dictKeys:                                  # writes dict values for sorted keys to output file
+            # add item for sequence containing repeat
+            overallRepeatSequences.append(1)
+            # writes dict values for sorted keys to output file
+            for k in dictKeys:                                  
+                overallRepeats.append(1)
                 dataList = dataOut[k].split()
                 csvData = [record.title, ' '.join(dataList[:-7]), dataList[-7], ' '.join(dataList[-6:-3]), dataList[-3], dataList[-2], dataList[-1]]
                 csvWriter.writerow(csvData)
-                #file.write(('%s\t%s\t%s\t%s\t%s\t%s\t%s\n') % (record.title, ' '.join(dataList[:-7]), dataList[-7], ' '.join(dataList[-6:-3]), dataList[-3], dataList[-2], dataList[-1]))
-            #file.write(('---------------------------------------%s') % ('\n'))
+        elif not dictKeys and noRepeats:
+            csvData = [record.title, "No repeats found"]        
+            csvWriter.writerow(csvData)
+        sequenceCount +=1
     stopTime = time.time()
     runTime = stopTime - startTime
     csvWriter.writerow([''])
@@ -167,9 +163,13 @@ def readInfo(inFile, repeatChoice, outFile):
         userChoice = (('%s ') % (choice))
     userChoice = (('You searched for all %s microsatellite repeats in the above sequences') % (userChoice))
     csvWriter.writerow([userChoice])
+    #summary information
+    csvWriter.writerow(["Sequences containing repeats:", sum(overallRepeatSequences)])
+    csvWriter.writerow(["TOTAL number of repeats found:", sum(overallRepeats)])
+    csvWriter.writerow(["Sequences searched for repeats:", sequenceCount])
+    csvWriter.writerow([''])
     runTime = (('Time for execution = %f sec') % (runTime))
     csvWriter.writerow([runTime])
-    #file.write(('\n\nTime for execution = %f sec') % (runTime))
     file.close()
 
 #----------------------------------------------------------------------------------------
@@ -179,11 +179,12 @@ def readInfo(inFile, repeatChoice, outFile):
 class fileFunctions:
     
     def __init__(self, Parent):
-        self.Parent = Parent  # get-set parent window
+        """ get-set parent window """
+        self.Parent = Parent  
     
     def OnOpen(self, event):
         messageText = 'Choose a File for Searching'
-        wildCard = "Text or Fasta files (*.txt;*.fsa)|*.txt;*.fsa|All files (*.*)|*.*"
+        wildCard = "Text or Fasta files|*.txt;*.fsa;*.fasta|All files|*.*"
         try:
             dlg = wx.FileDialog(self.Parent, messageText, wildcard=wildCard)
         except:
@@ -209,10 +210,12 @@ class fileFunctions:
 
     def SaveFile(self, event):
         messageText = 'Choose a Location to Save the Output File'
+        wildCard = "Comma-Separated|*.csv"
+        defDirectory = os.path.dirname(self.infile)
         try:
-            dlg = wx.FileDialog(self.Parent, messageText)
+            dlg = wx.FileDialog(self.Parent, messageText, wildcard=wildCard, defaultDir=defDirectory)
         except:
-            dlg = wx.FileDialog(self, messageText)
+            dlg = wx.FileDialog(self, messageText, wildcard=wildCard, defaultDir=defDirectory)
         dlg.SetStyle(wx.SAVE)
         if dlg.ShowModal() == wx.ID_OK:
             self.outfile = dlg.GetPath()
@@ -267,7 +270,7 @@ class fileFunctions:
         #    self.genericError('output file')
         #if not self.selection:
         #    self.genericError('search criterion')
-        readInfo(self.infile,self.selection,self.outfile)
+        readInfo(self.infile,self.selection,self.outfile,self.noRepeats)
         
         # menu errors still not correct - perhaps use try and except....
 
@@ -332,7 +335,14 @@ class DemoPanel(wx.Panel, fileFunctions):
         
         # present user with a run search button in GUI
         runProgram =  wx.Button(Parent, label="Search file", size=(200, 20), pos=(220,140))
-        runProgram.Bind(wx.EVT_BUTTON, self.RunSearch) 
+        runProgram.Bind(wx.EVT_BUTTON, self.RunSearch)
+        
+        # label options area
+        wx.StaticText(Parent, -1, pos=(5,180), label='Options:')
+        # add a checkbox to allow user to show clone without repeats
+        noRepeats = wx.CheckBox(Parent, label="Show clones with no repeats", pos=(14,200))
+        self.noRepeats = False
+        noRepeats.Bind(wx.EVT_CHECKBOX, self.noRepeatFunction)
         
     def OnSelection(self,event):
         checked = []
@@ -341,6 +351,10 @@ class DemoPanel(wx.Panel, fileFunctions):
                 checked.append(self.checklist.GetString(i))       
         self.selection = checked
         return self.selection
+    
+    def noRepeatFunction(self,event):
+        self.noRepeats = True
+        return self.noRepeats
 
           
         
@@ -348,7 +362,7 @@ class msatCommandFrame(wx.Frame, fileFunctions):
     """Main wxPython frame for msatCommand"""
     title = "msatCommand"
     def __init__(self, parent):
-        wx.Frame.__init__(self,parent,-1,self.title,size=(450,225), style=wx.DEFAULT_FRAME_STYLE)
+        wx.Frame.__init__(self,parent,-1,self.title,size=(450,265), style=wx.DEFAULT_FRAME_STYLE)
         color=(255,255,255)
         self.SetBackgroundColour(color)
         self.CreateStatusBar()
@@ -395,9 +409,9 @@ class msatCommandFrame(wx.Frame, fileFunctions):
     def SearchFunc(self,event):
         #pass
         DemoPanel(self).OnSelection
-        print 'got selection'
+        #print 'got selection'
         self.selection = DemoPanel(self).OnSelection
-        print self.selection
+        #print self.selection
         self.RunSearch
     
     def OnAbout(self, event):
