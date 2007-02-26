@@ -5,6 +5,7 @@
   * allow selection of '.fasta' files in File-Open Dialog (Fixed chromas issue?)
   * addition of option to output clone name and 'No Repeats Found' (T. Glenn enhancement request)
   * summary information added to end of file (EOF)
+  * issue with duplicate display of repeats (particularly dinucs.) fixed
 
 = 0.4.3 =
   * universal binary
@@ -14,14 +15,11 @@
   * slight mod to output files (column-izing output of start and end bp)
   * output files are now CSV
 
-
 = 0.4.1 =
-
-  * it should work correctly (removes Fasta error)
+  * program should work correctly (removes Fasta error)
   * rewrote regex code resulting in 2X speedup
   * can no longer overwrite input file
   * results output similar to ephemeris
-
 
 
 
