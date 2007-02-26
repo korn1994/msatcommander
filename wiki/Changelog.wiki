@@ -4,8 +4,9 @@
 = 0.4.4 (not yet released) =
   * allow selection of '.fasta' files in File-Open Dialog (Fixed chromas issue?)
   * addition of option to output clone name and 'No Repeats Found' (T. Glenn enhancement request)
-  * summary information added to end of file (EOF)
+  * summary information added to end of file (T. Glenn enhancement request)
   * issue with duplicate display of repeats (particularly dinucs.) fixed
+  * works in OS X 10.3.9 (no guarantees < 10.3.9)
 
 = 0.4.3 =
   * universal binary
@@ -20,5 +21,4 @@
   * rewrote regex code resulting in 2X speedup
   * can no longer overwrite input file
   * results output similar to ephemeris
-
 
