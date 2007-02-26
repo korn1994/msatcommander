@@ -4,6 +4,7 @@
 = 0.4.4 =
   * allow selection of '.fasta' files in File-Open Dialog (Fixed chromas issue?)
   * addition of option to output clone name and 'No Repeats Found' (T. Glenn enhancement request)
+  * summary information added to end of file (EOF)
 
 = 0.4.3 =
   * universal binary
@@ -20,7 +21,6 @@
   * rewrote regex code resulting in 2X speedup
   * can no longer overwrite input file
   * results output similar to ephemeris
-
 
 
 
