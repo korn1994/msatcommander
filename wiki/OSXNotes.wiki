@@ -1,1 +1,3 @@
 #summary OSX Specific Notes and Details
+
+The OS X version has been tested by a number of individuals and is recommended.  It is a [http://www.apple.com/universal/ universal binary] and is available from the [http://gallus.forestry.uga.edu/software/msatcommander/ binary downloads] at the 'msatcommander-OSX-current.dmg' link.
