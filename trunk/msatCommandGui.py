@@ -19,43 +19,32 @@ not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, B
  
 """
 
-import string, re, wx, time, csv, os.path
-from Bio import Fasta
+import string, re, wx, time, csv, os.path, sys
+#from Bio import Fasta
+from Bio.SeqIO import SequenceIterator
  
 idAbout = wx.NewId()
 idOpen  = wx.NewId()
 idSave  = wx.NewId()
+idQuit  = wx.NewId()
 idSearch = wx.NewId()
 idConversion = wx.NewId()
 idExit  = wx.NewId()
 idListBox = wx.NewId()
-      
-class mods: 
-    
-    """Class representing DNA as a string sequence.""" 
-
-    def complement(self, s):
-            
-            """return complementary dna sequence"""
-            
-            tab = string.maketrans('AGCTagct','TCGAtcga')
-            output = string.translate(s, tab)
-            return output
-
-    def revComplement(self, s):
-
-            """return complementary dna sequence"""
-
-            tab = string.maketrans('AGCTagct','TCGAtcga')
-            # translate it
-            output = string.translate(s, tab)
-            # reverse it
-            output = output[::-1]
-            return output
-    
 
 class search:
-
+    def __init__(self,s):
+        self.seq = s
+    
+    def revComplement(self, s):
+        """return complementary dna sequence"""
+        bases = string.maketrans('AGCTagct','TCGAtcga')
+        # translate it
+        output = string.translate(s, bases)
+        # reverse it
+        output = output[::-1]
+        return output
+    
     def genericMethod(self,passedSearchClass, repeat):
         """generic method for finding various microsatellite repeats"""
         # quick and dirty means of indexing position in passedSearchClass
@@ -63,7 +52,7 @@ class search:
         sLength = len(self.seq)
         for compiledRegEx in passedSearchClass:
             iterator = compiledRegEx.finditer(self.seq)
-            compIterator = compiledRegEx.finditer(mods().revComplement(self.seq))
+            compIterator = compiledRegEx.finditer(self.revComplement(self.seq))
             name = repeat + 'Letters'
             i = allRepeatClasses[name][compiledRegExPos]
             # list to help remove duplicates
@@ -81,16 +70,15 @@ class search:
                 # add if statement to remove repetitive finds...
                 if sLength - bases[1] not in baseList:
                     length = (bases[1] - bases[0]) / repeatUnits[repeat]
-                    seq = match.group()            
+                    #seq = match.group()            
                     i = i.strip('()')
-                    self.msatResults[bases[0]+1] = ('Reverse complement of %s repeat %s, (%s)^%s found between bases %s and %s.') % (repeat, i, mods().revComplement(i), length, sLength - bases[1]+1, sLength - bases[0]+1)
+                    self.msatResults[bases[0]+1] = ('Reverse complement of %s repeat %s, (%s)^%s found between bases %s and %s.') % (repeat, i, self.revComplement(i), length, sLength - bases[1]+1, sLength - bases[0]+1)
             compiledRegExPos+=1
 
-    def ephemeris(self, s, type):
+    def ephemeris(self, type):
         
         """Searches for microsatellite sequences (mononucleotide, dinucleotide, trinucleotide, tetranucleotide) in DNA string"""        
-        
-        self.seq = s
+
         # we will store output for each repeat in dictionary keyed on start base #
         self.msatResults={}                                 
         # moved All (slow!) here to keep from double searching
@@ -117,61 +105,14 @@ class search:
                     self.genericMethod(hexanucleotide,'hexanucleotide')
         return self.msatResults
     
-def readInfo(inFile, repeatChoice, outFile, noRepeats):    
-    startTime = time.time()
-    # opens file for output (overwrite existing)
-    file=open(outFile,'w')                                   
-    csvWriter = csv.writer(file, dialect = 'excel')
-    csvWriter.writerow(['Clone','Repeat Info','Repeat Count','Location','Start BP','','End BP'])
-    parser = Fasta.RecordParser()
-    infile = open(inFile)
-    iterator = Fasta.Iterator(infile, parser)
-    i = 0
-    # initialize variable for number of sequence searched
-    sequenceCount = 0
-    # initialize list for sequence containing repeats
-    overallRepeatSequences = []
-    # overall repeats list
-    overallRepeats = []
-    while 1:
-        record = iterator.next()
-        if not record:
-            break
-            infile.close()
-            file.close()
-        dataOut=search().ephemeris(record.sequence, repeatChoice) 
-        dictKeys=dataOut.keys()
-        # sorts keys so bp locations will be in order by clone name
-        dictKeys.sort()                                    
-        if dictKeys:
-            # add item for sequence containing repeat
-            overallRepeatSequences.append(1)
-            # writes dict values for sorted keys to output file
-            for k in dictKeys:                                  
-                overallRepeats.append(1)
-                dataList = dataOut[k].split()
-                csvData = [record.title, ' '.join(dataList[:-7]), dataList[-7], ' '.join(dataList[-6:-3]), dataList[-3], dataList[-2], dataList[-1]]
-                csvWriter.writerow(csvData)
-        elif not dictKeys and noRepeats:
-            csvData = [record.title, "No repeats found"]        
-            csvWriter.writerow(csvData)
-        sequenceCount +=1
-    stopTime = time.time()
-    runTime = stopTime - startTime
-    csvWriter.writerow([''])
-    for choice in repeatChoice:
-        userChoice = (('%s ') % (choice))
-    userChoice = (('You searched for all %s microsatellite repeats in the above sequences') % (userChoice))
-    csvWriter.writerow([userChoice])
-    #summary information
-    csvWriter.writerow(["Sequences containing repeats:", sum(overallRepeatSequences)])
-    csvWriter.writerow(["TOTAL number of repeats found:", sum(overallRepeats)])
-    csvWriter.writerow(["Sequences searched for repeats:", sequenceCount])
-    csvWriter.writerow([''])
-    runTime = (('Time for execution = %f sec') % (runTime))
-    csvWriter.writerow([runTime])
-    file.close()
-
+class excelSingleSpace:
+    """class for csv module to work correctly"""
+    delimiter = ','
+    quotechar = '"'
+    escapechar = None
+    doublequote = True
+    skipinitialspace = False
+    lineterminator = '\r'
 #----------------------------------------------------------------------------------------
 # program related functions for GUI (repeated within wx.Frame and other wx.Classes)
 #----------------------------------------------------------------------------------------
@@ -219,11 +160,6 @@ class fileFunctions:
         dlg.SetStyle(wx.SAVE)
         if dlg.ShowModal() == wx.ID_OK:
             self.outfile = dlg.GetPath()
-            #print 'infile is...', self.infile
-            #print 'outfile is...', self.outfile
-            #self.runConversion()
-            #replace the above with something
-            #self.runSearch()
             dlg.Destroy()
             if self.outfile == self.infile:
                 messageText = 'You cannot overwrite the input file!'
@@ -248,31 +184,60 @@ class fileFunctions:
             error.Destroy()            
             dlg.Destroy()  
             #self.SaveFile(event=None)  # for extra repetitive window opening - e.g. until input
-    
-    #def OnSelection(self,event):
-    #    #id = event.GetSelection()
-    #   #name = self.checklist.GetString(id)
-    #    #print name
-    #    print 'in selection loop'
-    #    checked = []
-    #    for i in range(DemoPanel().checklist.GetCount()):
-    #        if DemoPanel().checklist.IsChecked(i):
-    #            checked.append(DemoPanel().checklist.GetString(i))       
-    #    self.selection = checked
-    #    #return checked
             
+    def printRunData(self):
+        for choice in self.selection:
+            userChoice = (('%s ') % (choice))
+        userChoice = (('You searched for all %s microsatellite repeats in the above sequences') % (userChoice))
+        runTime = time.time() - self.startTime
+        runTime = (('Time for execution = %f sec') % (runTime))
+        self.csvWriter.writerows([
+            [''],
+            [userChoice],
+            ["Sequences containing repeats:", sum(self.overallRepeatSequences)],
+            ["TOTAL number of repeats found:", sum(self.overallRepeats)],
+            ["Sequences searched for repeats:", self.sequenceCount],
+            [''],
+            [runTime]
+            ])
+    
     def RunSearch(self, event):
-        #print self.infile
-        #print self.outfile
-        #if not self.infile:
-        #    self.genericError('input file')
-        #if not self.outfile:
-        #    self.genericError('output file')
-        #if not self.selection:
-        #    self.genericError('search criterion')
-        readInfo(self.infile,self.selection,self.outfile,self.noRepeats)
-        
-        # menu errors still not correct - perhaps use try and except....
+        self.startTime = time.time()
+        # opens file for output (overwrite existing)
+        file=open(self.outfile,'w')                                   
+        self.csvWriter = csv.writer(file, dialect = excelSingleSpace)
+        self.csvWriter.writerow(['Clone','Repeat Info','Repeat Count','Location','Start BP','','End BP'])
+        # new-style biopython SeqIO iterator
+        handle = open(self.infile,"rU")
+        # initialize variable for number of sequence searched
+        self.sequenceCount = 0
+        # initialize list for sequence containing repeats
+        self.overallRepeatSequences = []
+        # overall repeats list
+        self.overallRepeats = []
+        for record in SequenceIterator(handle,"fasta"):
+            sequence = search(record.seq.tostring())
+            dataOut=sequence.ephemeris(self.selection) 
+            dictKeys=dataOut.keys()
+            # sorts keys so bp locations will be in order by clone name
+            dictKeys.sort()                                    
+            if dictKeys:
+                # add item for sequence containing repeat
+                self.overallRepeatSequences.append(1)
+                # writes dict values for sorted keys to output file
+                for k in dictKeys:                                  
+                    self.overallRepeats.append(1)
+                    dataList = dataOut[k].split()
+                    cloneResults = [record.id, ' '.join(dataList[:-7]), dataList[-7], ' '.join(dataList[-6:-3]), dataList[-3], dataList[-2], dataList[-1]]
+                    self.csvWriter.writerow(cloneResults)
+            elif not dictKeys and self.noRepeats:
+                cloneResults = [record.id, "No repeats found"]        
+                self.csvWriter.writerow(cloneResults)
+            self.sequenceCount +=1       
+        self.printRunData()
+        # close open files
+        handle.close()
+        file.close()
 
     def genericError(self, errorItem):
         messageText = (('You must specify a %s') % (errorItem))
@@ -373,6 +338,7 @@ class msatCommandFrame(wx.Frame, fileFunctions):
         menu1.Append(idOpen, "&Open...\tCtrl-O","Open a file for searching")
         menu1.Append(idSave, "&Save output as...\tCtrl-S","Save output file as...")
         menu1.Append(idSearch, "&Search File\tCtrl-Z", "Convert open file")
+        menu1.Append(idQuit, "&Quit\tCtrl-Q","Quit")
 
         #and the conversion menu
         #menu2 = wx.Menu()
@@ -397,6 +363,7 @@ class msatCommandFrame(wx.Frame, fileFunctions):
         wx.EVT_MENU(self, idSave, self.SaveFile)
         wx.EVT_MENU(self, idSearch, self.SearchFunc)
         wx.EVT_MENU(self, idAbout, self.OnAbout)
+        wx.EVT_MENU(self, idQuit, self.Quit)
         
         #self.Bind(wx.EVT_MENU, self.OnOpen)
         #self.Bind(wx.EVT_MENU, self.SaveFile)
@@ -425,6 +392,9 @@ class msatCommandFrame(wx.Frame, fileFunctions):
     def OnExit(self, event):
         self.Close()
         #self.Close(true)
+    
+    def Quit(self,event):
+        sys.exit()
         
 
 
