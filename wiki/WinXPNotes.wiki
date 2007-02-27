@@ -1,1 +1,8 @@
 #summary Windows XP Specific Notes and Details
+
+There is an alpha version of a windows executable available in the [http://gallus.forestry.uga.edu/software/msatcommander/ binary downloads] at the 'msatcommander-WINXP-current.zip' link.  There are some known issues with this version.  Several of these issues have been fixed in SVN, but have not made their way into the binary.  These are:
+  * you must unzip the archive somewhere... there is not an installer at this point.
+  * ensure you add the '.csv' to the filename in the save-file dialog
+  * there is really no indication given as to when the program is finished.  this sucks.  i will try and fix this sometime in the near future...
+
+This file is not hosted on google code for the reasons given above and the fact that it is *really* a pre-release version.
