@@ -57,8 +57,7 @@ If you don't want to fuss with the CVS version of Biopython (you still need the 
 svn checkout http://msatcommander.googlecode.com/svn/tags/msatcommand-release-0.3.0/ msatcommander-svn
 }}}
 
-The code is in the msatCommand.py file.
-
+The code is in the msatCommand.py file.  The 0.3.0 version is older and *much* slower than the 0.4.5 version.
 
 
 
