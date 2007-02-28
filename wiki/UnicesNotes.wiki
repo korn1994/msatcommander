@@ -1,4 +1,4 @@
-#summary Unix-like OS-specific Notes and Details
+#summary Unix-like OSs Specific Notes and Details
 
 == Running the GUI ==
 
@@ -43,7 +43,6 @@ svn checkout http://msatcommander.googlecode.com/svn/trunk/ msatcommander
 *However*, I have not gotten around to updating the code - so it is old (version 0.3.0) and *slow*, in comparison to the new code.  
 
 After getting the OSX and WinXP binaries sorted and tested, I will update the command-line version so that it will reflect the current status of the code.
-
 
 
 
