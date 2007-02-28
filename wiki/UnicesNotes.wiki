@@ -1,0 +1,57 @@
+#summary Unix-like OS-specific Notes and Details
+
+== Running the GUI ==
+
+Provided that you are using a unix-like operating system (FreeBSD, Linux, Solaris, &c), you should be able to run the GUI source with
+{{{
+python msatCommandGui.py
+}}} 
+*or* 
+{{{
+pythonw msatCommandGui.py
+}}} 
+depending on your python installation and environment.  However, there are several dependencies:
+
+  * Python (2.4.3 and 2.4.4 known to work; 2.5.x status unknown)
+  * [http://www.wxpython.org/ wxPython] (version 2.6.xx)
+  * [http://biopython.org/wiki/Main_Page Biopython] (CVS versions after 2/26/07 should work)
+
+Biopython may be checked out of anonymous CVS (password: cvs):
+{{{
+cvs -d:pserver:cvs@cvs.open-bio.org:/home/repository/biopython login
+cvs -d:pserver:cvs@cvs.open-bio.org:/home/repository/biopython co biopython
+}}}
+
+If you don't want to fuss with the CVS version of Biopython (you still need the stable 1.42 version), you should checkout msatcommander from one of the tagged subversion directories (< version 0.4.5).  To checkout the code, you must have the subversion client installed.  Then:
+
+{{{
+svn checkout http://msatcommander.googlecode.com/svn/tags/msatcommand-GUI-0.4.4/ msatcommander-svn
+}}}
+
+Earlier tagged releases (< 0.4.5) use the Fasta module that is available in Biopython 1.42.  Newer versions make use of the SeqIO modules which are faster and *handle exceptions better* than the older Fasta modules.
+
+Biopython should implement these new features with the 1.43 release.
+
+== Command-line version ==
+
+There is also a command-line version of msatcommander (msatCommand.py).  This is currently available from the trunk svn directory:
+
+{{{
+svn checkout http://msatcommander.googlecode.com/svn/trunk/ msatcommander
+}}}
+
+*However*, I have not gotten around to updating the code - so it is old (version 0.3.0) and *slow*, in comparison to the new code.  
+
+After getting the OSX and WinXP binaries sorted and tested, I will update the command-line version so that it will reflect the current status of the code.
+
+
+
+
+
+
+
+
+
+
+
+
