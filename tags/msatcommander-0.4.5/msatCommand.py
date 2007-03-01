@@ -19,18 +19,74 @@ not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, B
  
 """
 
-import string, re, wx, time, csv, os.path, sys
-#from Bio import Fasta
+import string, re, time, csv, os.path, getopt, sys
 from Bio.SeqIO import SequenceIterator
- 
-idAbout = wx.NewId()
-idOpen  = wx.NewId()
-idSave  = wx.NewId()
-idQuit  = wx.NewId()
-idSearch = wx.NewId()
-idConversion = wx.NewId()
-idExit  = wx.NewId()
-idListBox = wx.NewId()
+       
+class progressBar:
+    """ Creates a text-based progress bar. Call the object with the `print'
+        command to see the progress bar, which looks something like this:
+            
+        [=======>        22%                  ]
+        
+        You may specify the progress bar's width, min and max values on init.
+    """
+
+    def __init__(self, minValue = 0, maxValue = 100, totalWidth=80):
+        self.progBar = "[]"   # This holds the progress bar string
+        self.min = minValue
+        self.max = maxValue
+        self.span = maxValue - minValue
+        self.width = totalWidth
+        self.amount = 0       # When amount == max, we are 100% done 
+        self.updateAmount(0)  # Build progress bar string
+
+    def updateAmount(self, newAmount = 0):
+        """ Update the progress bar with the new amount (with min and max
+            values set at initialization; if it is over or under, it takes the
+            min or max value as a default. """
+        if newAmount < self.min: newAmount = self.min
+        if newAmount > self.max: newAmount = self.max
+        self.amount = newAmount
+
+        # Figure out the new percent done, round to an integer
+        diffFromMin = float(self.amount - self.min)
+        percentDone = (diffFromMin / float(self.span)) * 100.0
+        percentDone = int(round(percentDone))
+
+        # Figure out how many hash bars the percentage should be
+        allFull = self.width - 2
+        numHashes = (percentDone / 100.0) * allFull
+        numHashes = int(round(numHashes))
+
+        # Build a progress bar with an arrow of equal signs; special cases for
+        # empty and full
+        if numHashes == 0:
+            self.progBar = "[>%s]" % (' '*(allFull-1))
+        elif numHashes == allFull:
+            self.progBar = "[%s]" % ('='*allFull)
+        else:
+            self.progBar = "[%s>%s]" % ('='*(numHashes-1),
+                                        ' '*(allFull-numHashes))
+
+        # figure out where to put the percentage, roughly centered
+        percentPlace = (len(self.progBar) / 2) - len(str(percentDone)) 
+        percentString = str(percentDone) + "%"
+
+        # slice the percentage into the bar
+        self.progBar = ''.join([self.progBar[0:percentPlace], percentString,
+                                self.progBar[percentPlace+len(percentString):]
+                                ])
+
+    def __str__(self):
+        return str(self.progBar)
+
+    def __call__(self, value):
+        """ Updates the amount, and writes to stdout. Prints a carriage return
+            first, so it will overwrite the current line in stdout."""
+        print '\r',
+        self.updateAmount(value)
+        sys.stdout.write(str(self))
+        sys.stdout.flush()
 
 class search:
     def __init__(self,s):
@@ -45,7 +101,7 @@ class search:
         output = output[::-1]
         return output
     
-    def genericMethod(self,passedSearchClass, repeat):
+    def genericMethod(self, passedSearchClass, repeat):
         """generic method for finding various microsatellite repeats"""
         # quick and dirty means of indexing position in passedSearchClass
         compiledRegExPos = 0                                                   
@@ -77,12 +133,14 @@ class search:
 
     def ephemeris(self, type):
         
-        """Searches for microsatellite sequences (mononucleotide, dinucleotide, trinucleotide, tetranucleotide) in DNA string"""        
-
+        """Searches for microsatellite sequences (mononucleotide, dinucleotide, 
+        trinucleotide, tetranucleotide) in DNA string"""
+        
         # we will store output for each repeat in dictionary keyed on start base #
         self.msatResults={}                                 
+        #print 's.mono ', self.mononucleotide
         # moved All (slow!) here to keep from double searching
-        if 'All (slow)' in type:                          
+        if 'All' in type:                          
             self.genericMethod(mononucleotide, 'mononucleotide')
             self.genericMethod(dinucleotide,'dinucleotide')
             self.genericMethod(trinucleotide,'trinucleotide')
@@ -104,7 +162,7 @@ class search:
                 elif str(searchClass) == 'Hexanucleotide':
                     self.genericMethod(hexanucleotide,'hexanucleotide')
         return self.msatResults
-    
+
 class excelSingleSpace:
     """class for csv module to work correctly"""
     delimiter = ','
@@ -113,78 +171,65 @@ class excelSingleSpace:
     doublequote = True
     skipinitialspace = False
     lineterminator = '\r'
-#----------------------------------------------------------------------------------------
-# program related functions for GUI (repeated within wx.Frame and other wx.Classes)
-#----------------------------------------------------------------------------------------
 
 class fileFunctions:
     
-    def __init__(self, Parent):
-        """ get-set parent window """
-        self.Parent = Parent  
+    def __init__(self):
+        # initialize to defaults
+        self.outfile, self.selection = '','All'
+        # get options passed on CL
+        try:
+            opts, args = getopt.getopt(sys.argv[1:], 'i:o:s:vh')
+        except getopt.GetoptError:
+            self.Usage()
+            sys.exit(2)
+        for o,a in opts:
+            if o in ("-i","--input"):self.infile = a
+            if o in ("-o","--output"):self.outfile = a
+            if o in ("-s","--search"):self.selection = a
+            if o in ("-h","--help"):
+                self.Usage()
+                sys.exit()
     
-    def OnOpen(self, event):
-        messageText = 'Choose a File for Searching'
-        wildCard = "Text or Fasta files|*.txt;*.fsa;*.fasta|All files|*.*"
+    def Usage(self):
+        print """
+        Usage:
+        ==========
+        microsatFinder [-i|--input] FILE [-o|--output] FILE [-s|--search] TYPE [-h|--help]
+        """
+        sys.exit()
+    
+    def fileExceptions(self):
+        print "\n***********************************"
+        print "msatcommander\ncommand-lineversion 0.4.5"
+        print "**********************************"
         try:
-            dlg = wx.FileDialog(self.Parent, messageText, wildcard=wildCard)
+            # have to strip whitespace characters for dragging folders
+            self.infile = os.path.abspath(string.strip(self.infile))
+            # calls function above
+            #fileList=getFiles(input)
         except:
-            dlg = wx.FileDialog(self, messageText, wildcard=wildCard)
-        dlg.SetStyle(wx.OPEN)
-        if dlg.ShowModal() == wx.ID_OK:
-            self.infile = dlg.GetPath()                                                       
-            #self.userChoice()
-            #print 'infile is...', self.infile
-            dlg.Destroy()
-            #return infile  
+            print 'File/Directory does not exist!\n\nExiting.'
+            sys.exit()
+        if self.selection in ['tetra','penta','hexa', 'All']:
+                print (('\nYou are searching for %s microsatellite repeats.\n') % (self.selection.upper()))
         else:
-            messageText = 'You must specify an input file!'
-            windowTitle = 'Error'
-            try:
-                error = wx.MessageDialog(self.Parent, messageText, windowTitle, wx.OK | wx.ICON_INFORMATION)
-            except:
-                error = wx.MessageDialog(self, messageText, windowTitle, wx.OK | wx.ICON_INFORMATION)
-            error.ShowModal()
-            error.Destroy()        
-            dlg.Destroy()
-            #self.OnOpen(event=None)  # for extra repetitive window opening - e.g. until input
-
-    def SaveFile(self, event):
-        messageText = 'Choose a Location to Save the Output File'
-        wildCard = "Comma-Separated|*.csv"
-        defDirectory = os.path.dirname(self.infile)
-        try:
-            dlg = wx.FileDialog(self.Parent, messageText, wildcard=wildCard, defaultDir=defDirectory)
-        except:
-            dlg = wx.FileDialog(self, messageText, wildcard=wildCard, defaultDir=defDirectory)
-        dlg.SetStyle(wx.SAVE)
-        if dlg.ShowModal() == wx.ID_OK:
-            self.outfile = dlg.GetPath()
-            dlg.Destroy()
-            if self.outfile == self.infile:
-                messageText = 'You cannot overwrite the input file!'
-                windowTitle = 'Error'
-                try:
-                    error = wx.MessageDialog(self.Parent, messageText, windowTitle, wx.OK | wx.ICON_INFORMATION)
-                except:
-                    error = wx.MessageDialog(self, messageText, windowTitle, wx.OK | wx.ICON_INFORMATION)
-                error.ShowModal()
-                error.Destroy()            
-                dlg.Destroy()
-                self.SaveFile(event=None)  # for extra repetitive window opening - e.g. until input
-            #return outfile
+            print "Please choose 'tetra'|'penta'|'hexa' or leave blank for the default (hexa).\n"
+            sys.exit()
+        if not self.outfile:
+            self.outfile=os.path.join(os.path.dirname(self.infile),'output.txt')
+            print (("Your file will be saved as %s\n") % (self.outfile))
+            userCheck = raw_input("Are you sure (Y/n)? ")
+            if userCheck not in ["y","Y"]:
+                print "\nDoing nothing. Exiting."
+                sys.exit()
         else:
-            messageText = 'You must specify an output file!'
-            windowTitle = 'Error'
             try:
-                error = wx.MessageDialog(self.Parent, messageText, windowTitle, wx.OK | wx.ICON_INFORMATION)
+                os.path.isdir(os.path.dirname(os.path.abspath(self.outfile)))
             except:
-                error = wx.MessageDialog(self, messageText, windowTitle, wx.OK | wx.ICON_INFORMATION)
-            error.ShowModal()
-            error.Destroy()            
-            dlg.Destroy()  
-            #self.SaveFile(event=None)  # for extra repetitive window opening - e.g. until input
-            
+                print 'This is not a valid path.  Exiting.'
+                sys.exit()
+    
     def printRunData(self):
         for choice in self.selection:
             userChoice = (('%s ') % (choice))
@@ -200,15 +245,20 @@ class fileFunctions:
             [''],
             [runTime]
             ])
-    
-    def runEnd(self):
-        messageText = 'Finished scanning for microsatellite repeats'
-        windowTitle = 'Search Completed'
-        dlg = wx.MessageDialog(self, messageText, windowTitle, wx.OK | wx.ICON_INFORMATION)
-        dlg.ShowModal()
-        dlg.Destroy()
-    
-    def RunSearch(self, event):
+
+    def RunSearch(self):
+        print 'Scanning sequences for microsatellites.  Percent Complete:'
+
+        handle = open(self.infile,"rU")
+        length = 0
+        for record in SequenceIterator(handle,"fasta"):
+            length += 1 
+        handle.close()
+        #length = len(data)/2
+        interval = 1./length * 100.
+
+        prog = progressBar(0,100,80)
+        
         self.startTime = time.time()
         # opens file for output (overwrite existing)
         file=open(self.outfile,'w')                                   
@@ -217,7 +267,7 @@ class fileFunctions:
         # new-style biopython SeqIO iterator
         handle = open(self.infile,"rU")
         # initialize variable for number of sequence searched
-        self.sequenceCount = 0
+        self.sequenceCount, startInt = 0,0
         # initialize list for sequence containing repeats
         self.overallRepeatSequences = []
         # overall repeats list
@@ -240,171 +290,51 @@ class fileFunctions:
             elif not dictKeys and self.noRepeats:
                 cloneResults = [record.id, "No repeats found"]        
                 self.csvWriter.writerow(cloneResults)
-            self.sequenceCount +=1       
+            self.sequenceCount +=1
+            startInt += interval
+            prog(startInt)       
         self.printRunData()
+        print ('\n\nOutput file written to:\n%s') % (os.path.abspath(self.outfile))
         # close open files
         handle.close()
         file.close()
-        self.runEnd()
 
-    def genericError(self, errorItem):
-        messageText = (('You must specify a %s') % (errorItem))
-        windowTitle = 'Error'
-        try:
-            error = wx.MessageDialog(self.Parent, messageText, windowTitle, wx.OK | wx.ICON_INFORMATION)
-        except:
-            error = wx.MessageDialog(self, messageText, windowTitle, wx.OK | wx.ICON_INFORMATION)
-        error.ShowModal()
-        error.Destroy()
-        
-class fileConversions:
+def readInfo(inFile, outFile, repeatChoice):
     
-    def RunConversion():
-        pass
-
-#---------------------------------
-# Main class for wxPython interface
-#---------------------------------
-class msatCommand(wx.App):
-    def OnInit(self):
-        frame = msatCommandFrame(None)
-        frame.Show(True)
-        self.SetTopWindow(frame)
-        return True
-
-class DemoPanel(wx.Panel, fileFunctions):
-    """Panel gives main user interface for program - parent is frame"""
-    def __init__(self, Parent, *args, **kwargs):
-        """Create the DemoPanel."""
-        wx.Panel.__init__(self, Parent, *args, **kwargs)
-        # get parent of window (frame class)
-        self.Parent = Parent
-        # label the panel
-        wx.StaticText(Parent, -1, pos=(5,5), label='Choose Repeat Class(es):')
-        
-        #present user with a open file button in GUI
-        fileSelect = wx.Button(Parent, label="Select file to scan...", size=(200, 20), pos=(220,40))
-        fileSelect.Bind(wx.EVT_BUTTON, self.OnOpen)       
-        #present user with a save file button in GUI
-        fileSave =  wx.Button(Parent, label="Select file for output...", size=(200, 20), pos=(220,90))
-        fileSave.Bind(wx.EVT_BUTTON, self.SaveFile )
-        
-        # Create a checklistbox on an existing panel widget
-        self.checklist = wx.CheckListBox(Parent, pos=(5, 25), size=(200,150))
-        # Present user with a list of choices in the GUI (these begin w/ capital here but not in variable names)
-        list = ['Mononucleotide',
-        'Dinucleotide',
-        'Trinucleotide',
-        'Tetranucleotide',
-        'Pentanucleotide', 
-        'Hexanucleotide', 
-        'All (slow)'
-        ]
-        # fire the items into the checklistbox
-        self.checklist.InsertItems(items=list, pos=0)
-        
-        # Bind checklist to event
-        self.checklist.Bind(wx.EVT_CHECKLISTBOX, self.OnSelection)
-        
-        # present user with a run search button in GUI
-        runProgram =  wx.Button(Parent, label="Search file", size=(200, 20), pos=(220,140))
-        runProgram.Bind(wx.EVT_BUTTON, self.RunSearch)
-        
-        # label options area
-        wx.StaticText(Parent, -1, pos=(5,180), label='Options:')
-        # add a checkbox to allow user to show clone without repeats
-        noRepeats = wx.CheckBox(Parent, label="Show clones with no repeats", pos=(14,200))
-        self.noRepeats = False
-        noRepeats.Bind(wx.EVT_CHECKBOX, self.noRepeatFunction)
-        
-    def OnSelection(self,event):
-        checked = []
-        for i in range(self.checklist.GetCount()):
-            if self.checklist.IsChecked(i):
-                checked.append(self.checklist.GetString(i))       
-        self.selection = checked
-        return self.selection
+    print 'Scanning sequences for microsatellites.  Percent Complete:'
     
-    def noRepeatFunction(self,event):
-        self.noRepeats = True
-        return self.noRepeats
-
-          
-        
-class msatCommandFrame(wx.Frame, fileFunctions):
-    """Main wxPython frame for msatCommand"""
-    title = "msatCommand"
-    def __init__(self, parent):
-        wx.Frame.__init__(self,parent,-1,self.title,size=(450,285), style=wx.DEFAULT_FRAME_STYLE)
-        color=(255,255,255)
-        self.SetBackgroundColour(color)
-        self.CreateStatusBar()
-        self.SetStatusText("")
-        
-        #create the file menu
-        menu1 = wx.Menu()
-        menu1.Append(idOpen, "&Open...\tCtrl-O","Open a file for searching")
-        menu1.Append(idSave, "&Save output as...\tCtrl-S","Save output file as...")
-        menu1.Append(idSearch, "&Search File\tCtrl-Z", "Convert open file")
-        menu1.Append(idQuit, "&Quit\tCtrl-Q","Quit")
-
-        #and the conversion menu
-        #menu2 = wx.Menu()
-       # menu2.Append(idConversion, "&Fasta Conversion\tCtrl-F", "Convert input file format")
-        
-        #and the help menu
-        menu3 = wx.Menu()
-        menu3.Append(idAbout, "&About\tCtrl-A", "Display information about this program")
-        
-        #add menu items to menubar
-        menuBar = wx.MenuBar()
-        menuBar.Append(menu1, "&File")
-        #menuBar.Append(menu2, "&Conversion")
-        menuBar.Append(menu3, "&Help") 
-        self.SetMenuBar(menuBar)
-        
-        #create a panel
-        self.Panel = DemoPanel(self)
-        
-        #setup events
-        wx.EVT_MENU(self, idOpen, self.OnOpen)
-        wx.EVT_MENU(self, idSave, self.SaveFile)
-        wx.EVT_MENU(self, idSearch, self.SearchFunc)
-        wx.EVT_MENU(self, idAbout, self.OnAbout)
-        wx.EVT_MENU(self, idQuit, self.Quit)
-        
-        #self.Bind(wx.EVT_MENU, self.OnOpen)
-        #self.Bind(wx.EVT_MENU, self.SaveFile)
-        #self.Bind(wx.EVT_MENU, self.RunSearch, id=idSearch)
-        #self.Bind(wx.EVT_MENU, fileConversions.RunConversion, id=idConversion)
-        #self.Bind(wx.EVT_MENU, self.OnAbout, id=idAbout)        
-        #self.Bind(wx.EVT_MENU, self.OnExit, id=idExit)
-        
+    file = open(inFile)
+    data = file.readlines()
+    file.close()
+    length = len(data)/2
+    interval = 1./length * 100.
     
-    def SearchFunc(self,event):
-        #pass
-        DemoPanel(self).OnSelection
-        #print 'got selection'
-        self.selection = DemoPanel(self).OnSelection
-        #print self.selection
-        self.RunSearch
+    prog = progressBar(0,100,80)
     
-    def OnAbout(self, event):
-        messageText = 'This program searches Fasta files for microsatellite repeats'
-        windowTitle = 'msatCommand'
-        dlg = wx.MessageDialog(self, messageText, windowTitle, wx.OK | wx.ICON_INFORMATION)
-        dlg.ShowModal()
-        dlg.Destroy()
-        
-       
-    def OnExit(self, event):
-        self.Close()
-        #self.Close(true)
-    
-    def Quit(self,event):
-        sys.exit()
-        
+    file=open(outFile,'w')                                   # opens file for output - append only to keep from overwriting
+    file.write('Microsatellite repeats found in the following sequences: \n\n')
 
+    parser = Fasta.RecordParser()
+    infile = open(inFile)
+    iterator = Fasta.Iterator(infile, parser)
+    i = 0
+    while 1:
+        record = iterator.next()
+        if not record:
+            break
+            infile.close()
+            file.close()
+        dataOut=search().ephemeris(record.sequence, repeatChoice) 
+        dictKeys=dataOut.keys()
+        dictKeys.sort()                                     # sorts keys so bp locations will be in order
+        if dictKeys:
+            #file.write(('%s>>%s %s') % ('\n', record.title, '\n'))
+            for k in dictKeys:                                  # writes dict values for sorted keys to output file
+                dataList = dataOut[k].split()
+                file.write(('%s\t%s\t%s\t%s\n') % (record.title, ' '.join(dataList[:-7]), dataList[-7], ' '.join(dataList[-6:])))
+            file.write(('---------------------------------------%s') % ('\n'))
+        i += interval
+        prog(i)
 
 if __name__ == '__main__':
     #------------------------------------------------------------------------
@@ -545,5 +475,10 @@ if __name__ == '__main__':
     #-----------------------------------------------------------------------
     # end global variable definition and compilation and begin main GUI loop    
     #-----------------------------------------------------------------------
-    app = msatCommand(redirect=True)
-    app.MainLoop()
+    userData = fileFunctions()
+    userData.fileExceptions()
+    userData.RunSearch()
+    #main()
+    #userInput,userOutput,userRepeatChoice = getUserFiles()
+    #readInfo(userInput, userOutput, userRepeatChoice)
+    #print '\n'
