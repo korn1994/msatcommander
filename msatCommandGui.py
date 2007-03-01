@@ -201,6 +201,13 @@ class fileFunctions:
             [runTime]
             ])
     
+    def runEnd(self):
+        messageText = 'Finished scanning for microsatellite repeats'
+        windowTitle = 'Search Completed'
+        dlg = wx.MessageDialog(self, messageText, windowTitle, wx.OK | wx.ICON_INFORMATION)
+        dlg.ShowModal()
+        dlg.Destroy()
+    
     def RunSearch(self, event):
         self.startTime = time.time()
         # opens file for output (overwrite existing)
@@ -238,6 +245,7 @@ class fileFunctions:
         # close open files
         handle.close()
         file.close()
+        self.runEnd()
 
     def genericError(self, errorItem):
         messageText = (('You must specify a %s') % (errorItem))
@@ -327,7 +335,7 @@ class msatCommandFrame(wx.Frame, fileFunctions):
     """Main wxPython frame for msatCommand"""
     title = "msatCommand"
     def __init__(self, parent):
-        wx.Frame.__init__(self,parent,-1,self.title,size=(450,265), style=wx.DEFAULT_FRAME_STYLE)
+        wx.Frame.__init__(self,parent,-1,self.title,size=(450,285), style=wx.DEFAULT_FRAME_STYLE)
         color=(255,255,255)
         self.SetBackgroundColour(color)
         self.CreateStatusBar()
