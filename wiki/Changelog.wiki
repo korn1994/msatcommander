@@ -1,7 +1,13 @@
 #summary Changelog for msatCommander (formerly msatFinder)
 #labels Featured
 
-= 0.4.4 (not yet released) =
+= 0.4.5 =
+  * fixed spacing issue on opening output csv file in Excel (WinXP)
+  * update of command-line version to 0.4.5
+  * windows version
+  * code cleanup
+
+= 0.4.4 =
   * allow selection of '.fasta' files in File-Open Dialog (Fixed chromas issue?)
   * addition of option to output clone name and 'No Repeats Found' (T. Glenn enhancement request)
   * summary information added to end of file (T. Glenn enhancement request)
@@ -21,4 +27,3 @@
   * rewrote regex code resulting in 2X speedup
   * can no longer overwrite input file
   * results output similar to ephemeris
-
