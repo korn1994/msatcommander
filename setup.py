@@ -10,8 +10,8 @@ import os, sys
 
 if os.name == 'posix':
     setup(
-        name='msatCommand',
-        version='0.4.4',
+        name='msatcommander',
+        version='0.4.5',
         description='python searching of fasta files for microsat repeats',
         author='Brant C. Faircloth',
         author_email='brant@uga.edu',
