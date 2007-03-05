@@ -1,0 +1,9 @@
+#summary msatcommander screenshot
+
+= Interface = 
+
+[interfaceScreen.png interface screenshot]
+
+= Output = 
+
+[outputCsvScreen.png output screenshot]
