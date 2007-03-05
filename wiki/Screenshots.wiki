@@ -2,8 +2,8 @@
 
 = Interface = 
 
-[http://msatcommander.googlecode.com/svn/wiki/interfaceScreen.png interface screenshot]
+http://msatcommander.googlecode.com/svn/wiki/interfaceScreen.png
 
 = Output = 
 
-[http://msatcommander.googlecode.com/svn/wiki/outputCsvScreen.png output screenshot]
+http://msatcommander.googlecode.com/svn/wiki/outputCsvScreen.png
