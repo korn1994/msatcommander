@@ -5,15 +5,15 @@
  In > 0.4.4, msatcommander works in OS X 10.3.9
 
 ==Will msatCommander work with Chromas files?==
- This should be fixed in the 0.4.4 version.
+ In > 0.4.4, Chromas files should work.
 
 ==Is msatCommander a universal binary?==
- Yes, it is!
+ Yes.
 
 ==Why the Beachball?==
  You will notice that (at least in the osx version of msatCommander) you get the beachball while the program is searching for repeats.  This is *normal*.  
 
- At some point (not a priority) I will use python threads to get rid of the beachball.  I will also implement a progress bar.
+ At some point (not a priority) I will use python threads to get rid of the beachball.  I will also implement a progress bar.  For now (0.4.5 and above), a popup window indicates completion.
 
 == What is performance like? ==
 
@@ -26,7 +26,6 @@
   * Scanning the same sequences from above on a new Core Duo Intel iMac 2.16 ghz took roughly half the time.
 
   * GUI and command-line speeds are roughly the same (+/- 0.2 seconds)
-
 
 
 
