@@ -1,4 +1,5 @@
 #summary msatcommander screenshot
+#labels Featured
 
 = Interface =
 
@@ -11,5 +12,4 @@ http://msatcommander.googlecode.com/svn/wiki/interfaceScreen.png
 msatcommander 0.4.5 output (csv) opened in MS Excel:
 
 http://msatcommander.googlecode.com/svn/wiki/outputCsvScreen.png
-
 
