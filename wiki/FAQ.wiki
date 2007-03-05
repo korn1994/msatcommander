@@ -2,7 +2,7 @@
 #labels Featured
 
 ==Does msatCommander work in OS X 10.3?==
- In the soon-to-be release 0.4.4, msatcommander works in OS X 10.3.9
+ In > 0.4.4, msatcommander works in OS X 10.3.9
 
 ==Will msatCommander work with Chromas files?==
  This should be fixed in the 0.4.4 version.
@@ -16,7 +16,6 @@
  You will notice that (at least in the osx version of msatCommander) you get the beachball while the program is searching for repeats.  This is *normal*.  
 
  At some point (not a priority) I will use python threads to get rid of the beachball.  I will also implement a progress bar.
-
 
 
 
