@@ -1,9 +1,15 @@
 #summary msatcommander screenshot
 
-= Interface = 
+= Interface =
+
+Screenshot of the interface on OS X (msatcommander 0.4.5):
 
 http://msatcommander.googlecode.com/svn/wiki/interfaceScreen.png
 
-= Output = 
+= Output =
+
+msatcommander 0.4.5 output (csv) opened in MS Excel:
 
 http://msatcommander.googlecode.com/svn/wiki/outputCsvScreen.png
+
+
