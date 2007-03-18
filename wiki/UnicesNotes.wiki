@@ -14,23 +14,7 @@ depending on your python installation and environment.  However, there are sever
 
   * Python (2.4.3 and 2.4.4 known to work; 2.5.x status unknown)
   * [http://www.wxpython.org/ wxPython] (version 2.6.xx)
-  * [http://biopython.org/wiki/Main_Page Biopython] (CVS versions after 2/26/07 should work)
-
-Biopython may be checked out of anonymous CVS (password: cvs):
-{{{
-cvs -d:pserver:cvs@cvs.open-bio.org:/home/repository/biopython login
-cvs -d:pserver:cvs@cvs.open-bio.org:/home/repository/biopython co biopython
-}}}
-
-If you don't want to fuss with the CVS version of Biopython (you still need the stable 1.42 version), you should checkout msatcommander from one of the tagged subversion directories (< version 0.4.5).  To checkout the code, you must have the subversion client installed.  Then:
-
-{{{
-svn checkout http://msatcommander.googlecode.com/svn/tags/msatcommand-GUI-0.4.4/ msatcommander-svn
-}}}
-
-Earlier tagged releases (< 0.4.5) use the Fasta module that is available in Biopython 1.42.  Newer versions make use of the SeqIO modules which are faster and *handle exceptions better* than the older Fasta modules.
-
-Biopython should implement these new features with the 1.43 release.
+  * [http://biopython.org/wiki/Download biopython 1.43] (*MUST* be 1.43 or a current CVS snapshot)
 
 == Command-line version ==
 
@@ -49,17 +33,23 @@ python msatCommand.py -i infile.fsa -o outfile.csv -s All
 As above, there are several dependencies:
 
   * Python (2.4.3 and 2.4.4 known to work; 2.5.x status unknown)
-  * [http://biopython.org/wiki/Main_Page Biopython] (CVS versions after 2/26/07 should work) 
+  * [http://biopython.org/wiki/Download Biopython 1.43] (*MUST* be 1.43 or a current CVS snapshot)
 
-If you don't want to fuss with the CVS version of Biopython (you still need the stable 1.42 version), you should checkout msatcommander from the tagged 0.3.0 directory.  To checkout the code, you must have the subversion client installed.  Then:
+== Using biopython from CVS ==
 
+As of 3/17/2007, this is not neccessary as the needed changes are in the [http://biopython.org/wiki/Download biopython 1.43 release].  However, if you want the bleeding edge, here are instructions for checking it out:
+
+Biopython may be checked out of anonymous CVS (password: cvs):
 {{{
-svn checkout http://msatcommander.googlecode.com/svn/tags/msatcommand-release-0.3.0/ msatcommander-svn
+cvs -d:pserver:cvs@cvs.open-bio.org:/home/repository/biopython login
+cvs -d:pserver:cvs@cvs.open-bio.org:/home/repository/biopython co biopython
 }}}
 
-The code is in the msatCommand.py file.  The 0.3.0 version is older and *much* slower than the 0.4.5 version.
+You will then need to install these files as you would any other module for python:
 
-
+{{{
+% python setup.py install
+}}} 
 
 
 
