@@ -21,12 +21,13 @@
 
   * Scanning a single ~80,000 bp sequence from Didelphis virgniana for all repeats took roughly 28 seconds on a pentium 4 @ 3 ghz.
 
+  *  Scanning 10,000 reptile contigs (approximately 16% of the entire genome) for tetra-nucleotide repeats took roughly 2 hours on a pentium D @ 3.4 ghz.  Six-thousand, one hundred twenty-four sequences contained repeats; 25,434 repeat arrays were identified (Thanks go to Nick Crawford, Savannah River Ecology Lab, for the information.)
+
   * Scanning 96 contigs for all microsatellite repeats (mean contig length ~ 400bp) takes  roughly 33 seconds on a DP 867 mhz G4 powermac.  
 
   * Scanning the same sequences from above on a new Core Duo Intel iMac 2.16 ghz took roughly half the time.
 
   * GUI and command-line speeds are roughly the same (+/- 0.2 seconds)
-
 
 
 
