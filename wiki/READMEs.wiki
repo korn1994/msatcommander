@@ -1,0 +1,14 @@
+#summary READMEs for various operating systems
+#labels Featured
+
+= OS X =
+
+[OSXNotes]
+
+= Windows XP =
+
+[WinXPNotes]
+
+= Unices (Unix/Linux/Solaris) = 
+
+[UnicesNotes]
