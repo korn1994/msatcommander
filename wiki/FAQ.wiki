@@ -17,7 +17,7 @@
 
 == What is performance like? ==
 
-  *Pretty good*.  Here are some examples:
+ _Pretty good_.  Here are some examples:
 
   * Scanning a single ~80,000 bp sequence from _Didelphis virgniana_ for all repeats took roughly 28 seconds on a pentium 4 @ 3 ghz.
 
