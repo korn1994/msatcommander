@@ -9,5 +9,5 @@ Below you will find links to the various README/Notes file for your operating sy
 = Windows XP =
 [WinXPNotes]
 
-= Unices (Unix/Linux/Solaris) = 
+= Unices = 
 [UnicesNotes]
