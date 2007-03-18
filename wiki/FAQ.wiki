@@ -17,7 +17,7 @@
 
 == What is performance like? ==
 
-  Pretty good.  Here are some examples:
+  *Pretty good*.  Here are some examples:
 
   * Scanning a single ~80,000 bp sequence from _Didelphis virgniana_ for all repeats took roughly 28 seconds on a pentium 4 @ 3 ghz.
 
@@ -28,7 +28,6 @@
   * Scanning the same 96 contigs for all microsatellite repeats from above on a Core Duo 2 Intel iMac @ 2.16 ghz took roughly 16 seconds.
 
   * GUI and command-line speeds are roughly the same (+/- 0.2 seconds)
-
 
 
 
