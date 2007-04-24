@@ -34,4 +34,4 @@
 
   This success rate is largely due to the fact that the primer3 program (the primer design engine) is pretty darn good at what it does.
 
-  Note:  this is dependent on your sequence quality, read-lengths, and organisms.  For example, organisms with transposable elements (gymnosperms) are finicky, to say the least.
+  *_Note_*:  this is dependent on your sequence quality, read-lengths, and organisms.  For example, organisms with transposable elements (gymnosperms) are finicky, to say the least.
