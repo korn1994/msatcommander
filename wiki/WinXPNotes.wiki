@@ -9,4 +9,11 @@ There is now a beta version of a windows executable available (see downloads sec
  
   # Download the windows '.zip' file (currently:  msatcommander-WINXP-GUI-0.4.5.zip)
   # Unzip the file to a location of your choosing
-  # Double-click on the application icon to run the program 
+  # Double-click on the msatcommander application (program icon) to run the program
+
+=Editing Primer Features=
+
+You can now make changes to primer features by editing the `primer.py` file.  However, be careful not to remove/change the items where indicated.  Primer design should support all primer3 1.1.1 features by making additions/changes in this file.  
+
+Feature changes are not currently available for the tagging options.  This is primarily because primer3 is somewhat picky with which values get input to the program. An incorrect addition could render the program useless and/or give you primers that do not work at all.  This is generally bad.
+
