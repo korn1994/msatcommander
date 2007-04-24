@@ -12,8 +12,8 @@ pythonw msatCommandGui.py
 }}} 
 depending on your python installation and environment.  However, there are several dependencies:
 
-  * Python (2.4.3 and 2.4.4 known to work; 2.5.x status unknown)
-  * [http://www.wxpython.org/ wxPython] (version 2.6.xx)
+  * Python (2.4.3, 2.4.4, and 2.5.0 known to work)
+  * [http://www.wxpython.org/ wxPython] (version 2.8.xx)
   * [http://biopython.org/wiki/Download biopython 1.43] (*MUST* be 1.43 or a current CVS snapshot)
 
 == Command-line version ==
@@ -50,7 +50,6 @@ You will then need to install these files as you would any other module for pyth
 {{{
 % python setup.py install
 }}} 
-
 
 
 
