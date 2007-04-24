@@ -4,11 +4,11 @@
 
 Provided that you are using a unix-like operating system (FreeBSD, Linux, Solaris, &c), you should be able to run the GUI source (msatCommandGui.py) with
 {{{
-python msatCommandGui.py
+python msatcommander.py
 }}} 
 *or* 
 {{{
-pythonw msatCommandGui.py
+pythonw msatcommander.py
 }}} 
 depending on your python installation and environment.  However, there are several dependencies:
 
@@ -50,7 +50,6 @@ You will then need to install these files as you would any other module for pyth
 {{{
 % python setup.py install
 }}} 
-
 
 
 
