@@ -29,4 +29,9 @@
 
   * GUI and command-line speeds are roughly the same (+/- 0.2 seconds)
 
+== What is the success rate of designed primers? ==
+  Primers designed using the design *and* tagging features of msatcommander have yielded approximately 85% amplification success.  This *does not* mean 85% of your primer will be polymorphic.  It does mean that roughly 85% should amplify some (perhaps monomorphic) product.  
 
+  This success rate is largely due to the fact that the primer3 program (the primer design engine) is pretty darn good at what it does.
+
+  Note:  this is dependent on your sequence quality, read-lengths, and organisms.  For example, organisms with transposable elements (gymnosperms) are finicky, to say the least.
