@@ -18,13 +18,13 @@ depending on your python installation and environment.  However, there are sever
 
 == Command-line version ==
 
-There is also a command-line version of msatcommander (msatCommand.py).  This is currently available from the trunk svn directory:
+There is also an older, command-line version of msatcommander (msatCommand.py).  This is currently available from the trunk svn directory:
 
 {{{
-svn checkout http://msatcommander.googlecode.com/svn/trunk/ msatcommander
+svn checkout http://msatcommander.googlecode.com/svn/trunk/commandline/ msatcommander
 }}}
 
-The commandline code has been (mostly) updated to a version equivalent with the GUI versions.  You can only scan for 'All' microsatellite classes at the moment.  This will be fixed shortly.  You may run the code with:
+You can only scan for 'All' microsatellite classes at the moment using this code.  It is unlikely that I will modify the commandline code to provide the functionality of the GUi code (the GUI stuff is bad enough and, unfortunately, commandline users are largely in the minority.  You may run the code with:
 
 {{{
 python msatCommand.py -i infile.fsa -o outfile.csv -s All
@@ -50,7 +50,6 @@ You will then need to install these files as you would any other module for pyth
 {{{
 % python setup.py install
 }}} 
-
 
 
 
