@@ -19,7 +19,7 @@ Feature changes are not currently available for the tagging options.  This is pr
 
 =Additional Notes=
   * Binary is built using Enthought Python 2.4.3 (not 2.5.0 as for OSX version).  
-  *This is because the installer for wxPython has not been updated for Python 2.5 at present
+  ** This is because the installer for wxPython has not been updated for Python 2.5 at present
   * py2exe was used to build the actual executable
   * source code (used as modules) are included in the archive files 
 
