@@ -27,10 +27,10 @@ Given that repeats were located within the source FASTA file, msatcommander will
 If the primer tagging option is chosen, msatcommander will:
   # move through each primer pair in primersNoTag.csv
   # apply a CAG &/ M13 &/ custom 5'-tail to the forward primer
-  # remove any common bases between the 5'-tail and the 5'-end of the forward primer
+  # remove any common bases between the 3' end of the 5'-tail and the 5'-end of the forward primer
   # 'build' a contig that consists of the tailed, forward primer + Enterobacteria phage lambda sequence (gi:9626243) + the rev. complement of the reverse primer
   # apply a CAG &/ M13 &/ custom 5'-tail to the reverse primer
-  # remove any common bases between the 5'-tail and the 5'-end of the reverse primer
+  # remove any common bases between the 3' end of the 5'-tail and the 5'-end of the reverse primer
   # 'build' a contig that consists of the forward primer + Enterobacteria phage lambda sequence (gi:9626243) + the rev. complement of the tailed, reverse primer
   # send all of these combinations to Primer3 as Boulder-IO files
   # keep the data that are returned from Primer3
@@ -38,6 +38,5 @@ If the primer tagging option is chosen, msatcommander will:
   # keep tailed primers returning statistics (primarily self-, end-, and pair-complementarity)
   # scan these tailed primers, and write the best one (lowest penalty score) to the primerTag.csv file
   # move to the next primer pair
-
 
 
