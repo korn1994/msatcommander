@@ -2,7 +2,7 @@
 
 == Running the GUI ==
 
-Provided that you are using a unix-like operating system (FreeBSD, Linux, Solaris, &c), you should be able to run the GUI source (msatCommandGui.py) with
+Provided that you are using a unix-like operating system (FreeBSD, Linux, Solaris, &c), you should be able to run the GUI source (msatcommander.py) with
 {{{
 python msatcommander.py
 }}} 
@@ -50,7 +50,6 @@ You will then need to install these files as you would any other module for pyth
 {{{
 % python setup.py install
 }}} 
-
 
 
 
