@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 """
-main.py
+msatcommander.py
 
 msatCommander :: Copyright (c) 2005-2007 Brant C. Faircloth. All rights reserved.
 
