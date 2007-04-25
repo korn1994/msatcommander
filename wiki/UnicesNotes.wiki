@@ -1,10 +1,16 @@
 #summary Unix-like OSs Specific Notes and Details
 
 =Getting The Source=
-The source code is available from the Downloads section as a tarball or you may check it out from the trunk using subversion.  To unzip,untar, run:
+The source code is available from the Downloads section as a tarball.  To unzip,untar, run:
 
 {{{
 tar -xzvf msatcommander-<version>.tar.gz
+}}}
+
+You can also check out the source from the trunk using subversion.  
+
+{{{
+svn checkout http://msatcommander.googlecode.com/svn/trunk/ msatcommander
 }}}
 
 =Getting primer3_core=
@@ -49,7 +55,6 @@ As above, there are several dependencies:
 
   * Python (2.4.3 and 2.4.4 known to work; 2.5.x status unknown)
   * [http://biopython.org/wiki/Download Biopython 1.43] (*MUST* be 1.43 or a current CVS snapshot)
-
 
 
 
