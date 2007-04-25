@@ -5,7 +5,7 @@
   * changes to the code to support windows build (uses subprocess.Popen)
   * fixed an issue with spaces in directory names
 
-= 0.8.0 =
+= 0.8.0 (Unreleased, Test Version)=
   * major changes to the GUI - rebuilt for wxPython 2.8 using xml
   * addition of primer design function using primer3
   * addition of primer tagging function using primer3
