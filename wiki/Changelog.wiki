@@ -4,6 +4,7 @@
 = 0.8.1 =
   * changes to the code to support windows build (uses subprocess.Popen)
   * fixed an issue with spaces in directory names
+  * fixed an issue with windows failing to delete a temporary file
 
 = 0.8.0 (Unreleased, Test Version)=
   * major changes to the GUI - rebuilt for wxPython 2.8 using xml
