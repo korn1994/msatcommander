@@ -11,7 +11,7 @@ Some of msatcommander's functionality is provided by the excellent Primer3 progr
   * The oligtm library and tests of Primer3 source code are released under the [http://www.gnu.org/copyleft/gpl.html GPL version 2]
 
 ==Warranty Summary==
-Because this program is free of charge, neither I nor any other developers of msatcommander are responsible for the quality of the output or the performance of the program.
+Because this program is free of charge, neither I nor any other developers of msatcommander _or_ Primer3 are responsible for the quality of the output or the performance of the program.
 
 In short, this means that you should probably try to develop some primers with the program and test them prior to ordering large batches. 
 
@@ -53,7 +53,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 The oligtm library and tests are released under the GPL.  See
 file src/gpl.txt or go to http://www.gnu.org/licenses/gpl.txt.
-
 
 
 
