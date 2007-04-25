@@ -1,5 +1,4 @@
 #summary READMEs for various operating systems
-#labels Featured
 
 Below you will find links to the various README/Notes file for your operating system(s).
 
@@ -11,6 +10,5 @@ Below you will find links to the various README/Notes file for your operating sy
 
 =Unices (Unix/Linux/Solaris)=
 [UnicesNotes]
-
 
 
