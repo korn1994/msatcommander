@@ -3,8 +3,11 @@
 
 ==License Summary==
 
-  * msatcommander is released under the [http://www.gnu.org/copyleft/gpl.html GPL version 2.0].  
-  * Some of the source code of Primer3 is released under the [http://www.opensource.org/licenses/bsd-license.php New BSD License]
+  * msatcommander is released under the [http://www.gnu.org/copyleft/gpl.html GPL version 2.0].
+
+Some of msatcommander's functionality is provided by the excellent Primer3 program.  Primer3 is an open-source project that falls under the following licenses:
+    
+  * Most of the source code of Primer3 is released under the [http://www.opensource.org/licenses/bsd-license.php New BSD License]
   * The oligtm library and tests of Primer3 source code are released under the [http://www.gnu.org/copyleft/gpl.html GPL version 2.0]
 
 ==Warranty Summary==
@@ -50,7 +53,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 The oligtm library and tests are released under the GPL.  See
 file src/gpl.txt or go to http://www.gnu.org/licenses/gpl.txt.
-
 
 
 
