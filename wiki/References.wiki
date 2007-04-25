@@ -1,0 +1,9 @@
+#summary Literature Cited
+ 
+  * Boutin-Ganache I, Raposo M, Raymond M, Deschepper CF (2001) M13-tailed primers improve the readability and usability of microsatellite analyses performed with two different allele-sizing methods.  BioTechniques, 31, 24-28.
+
+  * Glenn TC, Schable NA (2005) Isolating microsatellite DNA loci. In: Methods in Enzymology 395, Molecular Evolution: Producing the Biochemical Data, Part B (eds Zimmer EA, Roalson EH). Academic Press, San Diego. 
+  
+  * Rozen S, Skaletsky HJ (2000) Primer3 on the WWW for general users and for biologist programmers.  In: Bioinformatics Methods and Protocols: Methods in Molecular Biology (eds Krawetz S, Misener S).  Humana Press, Totowa, NJ.  
+
+  * Schable NA, Fischer RU, Glenn TC (2002) Tetranucleotide microsatellite DNA loci from the dollar sunfish (Lepomis marginatus).  Molecular Ecology Notes, 2, 509–511.
