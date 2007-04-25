@@ -3,7 +3,7 @@
 
 
 =Summary=
-  # msatcommander searches for user-specified microsatellite arrays
+  # msatcommander searches for user-specified classes (di-, tri-, tetranucleotide, etc.) of microsatellite arrays
   # msatcommander designs primers using python code, primer3, and [PrimerDefaults the default primer values]
   # these primers are written to an output file for each contig/sequence/array
   # msatcommander tags 'good' primers from the previous set using python code and evaluates them using Primer3
@@ -38,5 +38,4 @@ If the primer tagging option is chosen, msatcommander will:
   # keep tailed primers returning statistics (primarily self-, end-, and pair-complementarity)
   # scan these tailed primers, and write the best one (lowest penalty score) to the primerTag.csv file
   # move to the next primer pair
-
 
