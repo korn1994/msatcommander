@@ -18,7 +18,7 @@ Given that repeats were located within the source FASTA file, msatcommander will
   # move through each contig/sequence containing a repeat or combined repeat
   # generate a temporary input file for Primer3 using the sequence, the located repeat, and the [PrimerDefaults default primer selection values]
   # send this Boulder-IO file to Primer3
-  # generate a Primer3 formatted text file for the best 4 primers
+  # generate a Primer3 formatted text file for the best 4 primers (if there are 4)
   # place the absolute best primer (lowest penalty score) in primersNoTag.csv
   # move to the next contig/sequence
 
@@ -37,7 +37,6 @@ If the primer tagging option is chosen, msatcommander will:
   # keep tailed primers returning statistics (primarily self-, end-, and pair-complementarity)
   # scan these tailed primers, and write the best one (lowest penalty score) to the primerTag.csv file
   # move to the next primer pair
-
 
 
 
