@@ -1,0 +1,16 @@
+#summary Description of How It All Works
+
+=Summary= 
+
+  # msatcommander searches for user-specified microsatellite arrays
+  # msatcommander designs primers using python code, primer3, and [[PrimerDeafults the default primer values]]
+  # msatcommander tags 'good' primers from the previous setup and evaluates them using Primer3
+  # msatcommander places the 'best' tag+primer combination (in addition to the untagged forward or reverse primer) in an output file
+
+=Microsatellite Array Searching=
+
+MSATCOMMANDER uses regular expression pattern matching within each DNA sequence to locate microsatellite arrays within user-selected repeat classes.  Length of located repeat arrays within each class is a user-definable option. Repeat sequences are located using their lowest alphabetical, non-complementary designation, and repeat sequences fitting these designations are written to the summary output file.  To locate all microsatellite repeats fitting these designations, DNA sequences are first scanned in the 5’ – 3’ orientation.  The program then takes a second pass through the complement of the sequence in the 3’ – 5’ orientation.  Unknown bases (N) are allowed within microsatellite arrays of any class.  Users are given a choice of searching for any combination of repeat classes (mononucleotide to hexanucleotide) or all repeat classes at once.  Searches progress from simple to complex classes on a sequence-by-sequence basis.  Users also have the option to combine multiple repeat arrays located within a single sequence provided they occur within a user-defined distance from one another.
+
+
+
+
