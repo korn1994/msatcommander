@@ -3,7 +3,7 @@
 
 =Summary=
   # msatcommander searches for user-specified microsatellite arrays
-  # msatcommander designs primers using python code, primer3, and [[PrimerDeafults the default primer values]]
+  # msatcommander designs primers using python code, primer3, and [PrimerDefaults the default primer values]
   # msatcommander tags 'good' primers from the previous setup and evaluates them using Primer3
   # msatcommander places the 'best' tag+primer combination (in addition to the untagged forward or reverse primer) in an output file
 
@@ -15,7 +15,7 @@ This program uses regular expression pattern matching within each DNA sequence t
 Given that repeats were located within the source FASTA file, msatcommander will: 
   # (optional) combine multiple arrays within a sequence/contig if within the user-specified length
   # move through each contig/sequence containing a repeat or combined repeat
-  # generate a temporary input file for Primer3 using the sequence, the located repeat, and the [[PrimerDefaults default primer selection values]]
+  # generate a temporary input file for Primer3 using the sequence, the located repeat, and the [PrimerDefaults default primer selection values]
   # send this Boulder-IO file to Primer3
   # generate a Primer3 formatted text file for the best 4 primers
   # place the absolute best primer (lowest penalty score) in primersNoTag.csv
@@ -36,7 +36,6 @@ If the primer tagging option is chosen, msatcommander will:
   # keep tailed primers returning statistics (primarily self-, end-, and pair-complementarity)
   # scan these tailed primers, and write the best one (lowest penalty score) to the primerTag.csv file
   # move to the next primer pair
-
 
 
 
