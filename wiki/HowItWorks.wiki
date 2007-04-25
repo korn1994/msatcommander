@@ -1,4 +1,5 @@
 #summary Description of How It All Works
+#labels Featured
 
 
 =Summary=
@@ -36,7 +37,6 @@ If the primer tagging option is chosen, msatcommander will:
   # keep tailed primers returning statistics (primarily self-, end-, and pair-complementarity)
   # scan these tailed primers, and write the best one (lowest penalty score) to the primerTag.csv file
   # move to the next primer pair
-
 
 
 
