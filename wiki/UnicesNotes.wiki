@@ -18,10 +18,10 @@ Prior to runnning msatcommander, you will need to locate or build a [http://prim
 
 To build the primer3 binary:
   # Download the primer3 1.1.1 source (http://primer3.sourceforge.net)
-  # Unzip and untar the download (tar -xzvf primer3-1.1.1.tar.gz)
+  # Unzip and untar the download (`tar -xzvf primer3-1.1.1.tar.gz`)
   # cd to the src directory
   # run: `make all`
-  # cd to the test directory (cd ../test/)
+  # cd to the test directory (`cd ../test/`)
   # run: `perl p3test.pl` (runs regression tests on the binary)
 
 
@@ -66,4 +66,3 @@ As above, there are several dependencies:
 
   * Python (2.4.3 and 2.4.4 known to work; 2.5.x status unknown)
   * [http://biopython.org/wiki/Download Biopython 1.43] (*MUST* be 1.43 or a current CVS snapshot)
-
