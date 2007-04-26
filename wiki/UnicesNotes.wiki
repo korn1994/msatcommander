@@ -17,8 +17,8 @@ svn checkout http://msatcommander.googlecode.com/svn/trunk/ msatcommander
 Prior to runnning msatcommander, you will need to locate or build a [http://primer3.sourceforge.net binary version of primer3] (1.1.1 or greater).  
 
 To build the primer3 binary:
-  # Download the primer3 1.1.1 source (http://primer3.sourceforge.net)
-  # Unzip and untar the download (`tar -xzvf primer3-1.1.1.tar.gz`)
+  # Download the most recent primer3 source (http://primer3.sourceforge.net)
+  # Unzip and untar the download (`tar -xzvf primer3-<version>.tar.gz`)
   # cd to the src directory
   # run: `make all`
   # cd to the test directory (`cd ../test/`)
