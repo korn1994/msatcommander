@@ -14,7 +14,18 @@ svn checkout http://msatcommander.googlecode.com/svn/trunk/ msatcommander
 }}}
 
 =Getting primer3_core=
-Prior to runnning msatcommander, you will need to locate or build a [http://primer3.sourceforge.net binary version of primer3] (1.1.1 or greater).  The `primer3_core` binary should then be copied to the directory created from the tarball or the directory checked out from the trunk using subversion.
+Prior to runnning msatcommander, you will need to locate or build a [http://primer3.sourceforge.net binary version of primer3] (1.1.1 or greater).  
+
+To build the primer3 binary:
+  # Download the primer3 1.1.1 source (http://primer3.sourceforge.net)
+  # Unzip and untar the download (tar -xzvf primer3-1.1.1.tar.gz)
+  # cd to the src directory
+  # run: `make all`
+  # cd to the test directory (cd ../test/)
+  # run: `perl p3test.pl (runs regression tests on the binary 
+
+
+The `primer3_core` binary should then be copied to the top-level of the directory created from the msatcommander tarball or the directory checked out from the trunk using subversion.
 
 
 = msatcommander GUI =
@@ -55,6 +66,5 @@ As above, there are several dependencies:
 
   * Python (2.4.3 and 2.4.4 known to work; 2.5.x status unknown)
   * [http://biopython.org/wiki/Download Biopython 1.43] (*MUST* be 1.43 or a current CVS snapshot)
-
 
 
