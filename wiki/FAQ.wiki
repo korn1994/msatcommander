@@ -1,16 +1,15 @@
 #summary Frequently Asked Questions
 #labels Featured
 
-==Does msatCommander work in OS X 10.3?==
- As of version 0.8.0, msatcommander requires OSX 10.4.x.  Test.
-
+==Does msatcommander work in OS X 10.3?==
+ As of version 0.8.0, msatcommander requires OSX 10.4.x
 
 ==How does msatcommander deal with hairpins?==
- This is sort of a loaded question.  msatcommander uses primer3 for primer design.  primer3 takes a non-thermodynamic approach to evaluating self-, pair-, and end-complementarity.  As such, hairpins are evaluated without respect to thermodyamic properties.  
+ This is sort of a loaded question.  msatcommander uses primer3 for primer design.  primer3 takes a non-thermodynamic approach to evaluating self-, pair-, and end-complementarity.  As such, hairpins are evaluated without respect to thermodynamic properties.  
  
- There are packages (free and commercial) that will evaluate hairpins in a sequence ([http://www.bioinfo.rpi.edu/applications/hybrid/quikfold.php UNAFold]).  However, secondary structure prediction is not an easy task, and one that is affected by many parameters (Salt conc., Mg conc., Temperature, Oligo conc.).  For more information see:  Santalucia and Hicks, 2004.  Annu. Rev. Biophys. Biomol. Struct. 33:415–40 doi: [http://dx.doi.org/10.1146/annurev.biophys.32.110601.141800 10.1146/annurev.biophys.32.110601.141800])  You should also be aware that these programs are meant to provide *predictive results* 
+ There are packages (free and commercial) that will evaluate hairpins in a sequence ([http://www.bioinfo.rpi.edu/applications/hybrid/quikfold.php UNAFold]).  However, secondary structure prediction is not an easy task, and one that is affected by many parameters (Salt conc., Mg conc., Temperature, Oligo conc.).  For more information see:  Santalucia and Hicks, 2004.  Annu. Rev. Biophys. Biomol. Struct. 33:415–40 doi: [http://dx.doi.org/10.1146/annurev.biophys.32.110601.141800 10.1146/annurev.biophys.32.110601.141800])  You should also be aware that these programs are meant to provide *predictive results*. 
 
- Therefore, *primers and tagged primers may be designed that have hairpins with high stability* (i,e. they have high Tms).  Evaluating these tagged primers in a commercial or semi-commercial software package will likely show this for some primers.  It is also likely that results will differ between packages meant to these evaluations.  For example, a sequence recently tested gave the following results on 3 packages:
+ Therefore, *primers and tagged primers may be designed that have hairpins with high stability as indicated by certain software packages* (i,e. they have high Tms).  It is also likely that results will differ between packages used for these evaluations.  For example, a tagged primer sequence recently tested gave the following results on 3 different packages:
 
   * OligoAnalyzer (IDTDNA):
     * IDT Structure 1:  delta_G= - 3.4; Tm = 52.7 C
@@ -20,16 +19,9 @@
   * Oligo 6.8 (Primer Duplexes Window):
     * Oligo Structure 1:  delta_G = -3.10; Tm = 64.0 C
 
-==Will msatCommander work with Chromas files?==
- In > 0.4.4, Chromas files should work.
-
-==Is msatCommander a universal binary?==
- Yes.
-
-==Why the Beachball?==
- You will notice that (at least in the osx version of msatCommander) you get the beachball while the program is running.  This is *normal*.  
-
- At some point (not a priority) I will use python threads to get rid of the beachball.  I will also implement a progress bar.  For now (0.4.5 and above), a popup window indicates completion.
+ So, how do you deal with this problem?  
+  # You could ignore it, order the primers or tagged-primers and test them as you would any others.  This is what we have done with respect to the results presented below.
+  # You could test primers/tagged primers for hairpins and re-design problematic primers
 
 == What is searching performance like? ==
 
@@ -56,6 +48,17 @@
   Good question.  The vector sequence is used to keep things short and fast.  Generally speaking, we only want to know about self-,pair-, and end-complementarity of the tagged primers.  We don't care so much about the sequence in between these.  This also keeps things a bit open in the source code.  If you wanted to use just the tagging module, you could do so by just sending it a list of designed primers (in the correct format) for tagging - you don't need to have the FASTA file of sequence data.
 
   This becomes handy if you want to tag a bunch of primers that were designed using another program (again, you could do this with the source - you cannot currently do this using msatcommander).
+
+==Will msatCommander work with Chromas files?==
+ In > 0.4.4, Chromas files should work.
+
+==Is msatCommander a universal binary?==
+ Yes.
+
+==Why the Beachball?==
+ You will notice that (at least in the osx version of msatCommander) you get the beachball while the program is running.  This is *normal*.  
+
+ At some point (not a priority) I will use python threads to get rid of the beachball.  I will also implement a progress bar.  For now (0.4.5 and above), a popup window indicates completion.
 
 ==Why do you use subprocess.Popen versus os.popen?==
   Because windows does not play nicely with os.popen and the primer3_core binary.  That being said, there remains an 'issue' with subprocess.Popen and py2exe, and you must call it as follows (if building the windows GUI using py2exe):
