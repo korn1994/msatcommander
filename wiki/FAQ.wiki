@@ -4,6 +4,22 @@
 ==Does msatCommander work in OS X 10.3?==
  As of version 0.8.0, msatcommander requires OSX 10.4.x
 
+
+==How does msatcommander deal with hairpins?==
+ This is sort of a loaded question.  msatcommander uses primer3 for primer design.  primer3 takes a non-thermodynamic approach to evaluating self-, pair-, and end-complementarity.  As such, hairpins are evaluated without respect to thermodyamic properties.  
+ 
+ There are packages (free and commercial) that will evaluate hairpins in a sequence ([http://www.bioinfo.rpi.edu/applications/hybrid/quikfold.php UNAFold]).  However, secondary structure prediction is not an easy task, and one that is affected by many parameters (Salt conc., Mg conc., Temperature, Oligo conc.).  For more information see:  Santalucia and Hicks, 2004.  Annu. Rev. Biophys. Biomol. Struct. 33:415–40 doi: [http://dx.doi.org/10.1146/annurev.biophys.32.110601.141800 10.1146/annurev.biophys.32.110601.141800])  You should also be aware that these programs are meant to provide *predictive results* 
+
+ Therefore, *primers and tagged primers may be designed that have hairpins with high stability* (i,e. they have high Tms).  Evaluating these tagged primers in a commercial or semi-commercial software package will likely show this for some primers.  It is also likely that results will differ between packages meant to these evaluations.  For example, a sequence recently tested gave the following results on 3 packages:
+
+  * OligoAnalyzer (IDTDNA):
+    * IDT Structure 1:  delta_G= - 3.4; Tm = 52.7 C
+  * Mfold DINAMelt Server:
+    * Mfold Structure 1:  delta_G = -3.59; Tm = 54.4 C
+    * Mfold Structure 2:  delta_G = -2.72; Tm = 42.3 C
+  * Oligo 6.8 (Primer Duplexes Window):
+    * Oligo Structure 1:  delta_G = -3.10; Tm = 64.0 C
+
 ==Will msatCommander work with Chromas files?==
  In > 0.4.4, Chromas files should work.
 
@@ -50,4 +66,3 @@ p=subprocess.Popen(pathToPrimer3,shell=True,stdin=subprocess.PIPE,stdout=subproc
 {{{
 TypeError: an integer is required
 }}}
-
