@@ -2,7 +2,7 @@
 #labels Featured
 
 ==Does msatCommander work in OS X 10.3?==
- As of version 0.8.0, msatcommander requires OSX 10.4.x
+ As of version 0.8.0, msatcommander requires OSX 10.4.x.  Test.
 
 
 ==How does msatcommander deal with hairpins?==
