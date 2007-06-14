@@ -23,6 +23,9 @@
   # You could ignore it, order the primers or tagged-primers and test them as you would any others.  This is what we have done with respect to the results presented below.
   # You could test primers/tagged primers for hairpins and re-design problematic primers
 
+== Why is the Windows version so ugly? ==
+  Windows is ugly, ergo msatcommander on windows follows that pattern.  Seriously, wxPython applications for windows look slightly different from their OS X counterparts.  There are numerous reasons for this.  Basically, I don't have time to keep 2 GUI codebases up to date so that things are pretty on each OS.
+
 == What is searching performance like? ==
 
  _Pretty good_.  Here are some examples:
