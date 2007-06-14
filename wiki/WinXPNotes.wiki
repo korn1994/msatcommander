@@ -7,7 +7,7 @@ There is now a beta version of a windows executable available (see downloads sec
 
 =Installation=
  
-  # Download the windows '.zip' file (currently:  msatcommander-WINXP-GUI-0.4.5.zip)
+  # Download the windows '.zip' file (currently:  msatcommander-0.8.1-WINXP.zip)
   # Unzip the file to a location of your choosing
   # Double-click on the msatcommander application (program icon) to run the program
 
@@ -22,4 +22,3 @@ Feature changes are not currently available for the tagging options.  This is pr
   ** This is because the installer for wxPython has not been updated for Python 2.5 at present
   * py2exe was used to build the actual executable
   * source code (used as modules) are included in the archive files 
-
