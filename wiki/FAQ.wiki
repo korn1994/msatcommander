@@ -47,6 +47,10 @@
 
   _Note_:  *this is dependent on your sequence quality, read-lengths, and organism of interest.  For example, organisms with lots of transposable elements (gymnosperms) are finicky, to say the least.*
 
+  It is *probably a good idea* to design a test-batch of 10-20 primer pairs for your organism of interest using msatcommander.  These can be tested to evaluate your success prior to ordering larger batches (>50 primer pairs) for testing.
+
+  If you would like to provide me with information on your success rate (and organism), I would love to have it in hand and possibly to post to this wiki, with your permission.  You may contact me via the list-serve or by adding 'faircloth' to '@gmail.com'.
+
 ==Why do you use a vector sequence for the primer tagging?==
   Good question.  The vector sequence is used to keep things short and fast.  Generally speaking, we only want to know about self-,pair-, and end-complementarity of the tagged primers.  We don't care so much about the sequence in between these.  This also keeps things a bit open in the source code.  If you wanted to use just the tagging module, you could do so by just sending it a list of designed primers (in the correct format) for tagging - you don't need to have the FASTA file of sequence data.
 
@@ -72,3 +76,6 @@ p=subprocess.Popen(pathToPrimer3,shell=True,stdin=subprocess.PIPE,stdout=subproc
 {{{
 TypeError: an integer is required
 }}}
+
+
+
