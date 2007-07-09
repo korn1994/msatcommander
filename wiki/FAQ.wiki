@@ -32,7 +32,7 @@
 
   * Scanning a single ~80,000 bp sequence from _Didelphis virgniana_ for all repeats took roughly 28 seconds on a pentium 4 @ 3 ghz.
 
-  * Scanning chromosome 2L from *Drosophila melanogaster* (23Mb; GI: NT_033779.4) for dinucleotide arrays resulted in identification of 1645 arrays in approximately 5.2 minutes on a DP 867 mhz G4 powermac.
+  * Scanning chromosome 2L from _Drosophila melanogaster_ (23Mb; GI: NT_033779.4) for dinucleotide arrays resulted in identification of 1645 arrays in approximately 5.2 minutes on a DP 867 mhz G4 powermac.
 
   *  Scanning 10,000 reptile contigs (approximately 16% of the entire genome) for tetra-nucleotide repeats took roughly 2 hours on a pentium D @ 3.4 ghz.  Six-thousand, one hundred twenty-four sequences contained repeats; 25,434 repeat arrays were identified (Thanks go to Nick Crawford, Savannah River Ecology Lab, for the information.)
 
@@ -78,4 +78,3 @@ p=subprocess.Popen(pathToPrimer3,shell=True,stdin=subprocess.PIPE,stdout=subproc
 {{{
 TypeError: an integer is required
 }}}
-
