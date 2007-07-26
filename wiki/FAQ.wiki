@@ -23,6 +23,13 @@
   # You could ignore it, order the primers or tagged-primers and test them as you would any others.  This is what we have done with respect to the results presented below.
   # You could test primers/tagged primers for hairpins and re-design problematic primers
 
+== Why do my primers for certain loci (in some cases) contain repeats from other loci? ==
+  In a sense, this is a limitation of primer3.  We can define the max-poly-x flag to keep primers from having a run of identical bases, but primer3 does not have a flag to avoid including various classes of repeat arrays.
+
+  That being said, you can sometimes get around this problem by choosing to *combine repeat arrays*.  In other cases, you will just need to visually scan your primers to ensure they do not contain repeats (this is generally easy, as repeat arrays tend to be easy to see in short lengths of sequence).
+
+  A future addition to msatcommander will scan designed and tagged primers to fix this issue.
+
 == Why is the Windows version so ugly? ==
   Windows is ugly, ergo msatcommander on windows follows that pattern.  Seriously, wxPython applications for windows look slightly different from their OS X counterparts.  There are numerous reasons for this.  Basically, I don't have time to keep 2 GUI codebases up to date so that things are pretty on each OS.
 
