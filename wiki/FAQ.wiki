@@ -8,7 +8,7 @@
  The primary reference re: tagging primers is Boutin-Ganache et al. 2001 (see [References]).  Since that article, there have been several others using tags to fluorescently label primers (e.g. Schable et al. 2002).  Travis Glenn provides addtional information re: tagging primers [http://www.uga.edu/srel/DNA_Lab/Universal_Fluorescent_PrimerTags4.pdf here].  Additionally, you may design and attach your own tagged sequences.
 
 ==What are the tag sequences?==
- These may be found in the source code (mscprimertag.py), as well.  Remember that commond bases (between the 3' end of the tag and 5' end of the primer sequence) will be removed:
+ These may be found in the source code (mscprimertag.py), as well.  Remember that common bases (between the 3' end of the tag and 5' end of the primer sequence) will be removed:
 
  {{{CAG    = 'CAGTCGGGCGTCATCA'}}}
 
