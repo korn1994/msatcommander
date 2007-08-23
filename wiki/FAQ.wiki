@@ -10,7 +10,7 @@
 ==Can I use tagged primers for large studies?==
  Yes, you can.  We are currently using tagged primers to genotype roughly 2000 individuals @ 16 loci.  The nice thing about tags is that they allow a modular approach to fluorescent genotyping.  If you want/need to change dye 'colors' (due to overlap problems, for instance), it's easy enough - just purchase the tag you need with a new dye attached.  
 
- Similarly, you can quickly, easily, and inexpensively change entire dye sets, just by purchasing the tags you need in the 'colors' you want.  For example, you can choose to move from DS-30 to DS-33 (see [http://www.uri.edu/research/gsc/docs/ABI%20Dye%20Set%20card.pdf here] if you are using an Applied Biosytems machine.
+ Similarly, you can quickly, easily, and inexpensively change entire dye sets, just by purchasing the tags you need in the 'colors' you want.  For example, you can choose to move from DS-30 to DS-33 (see [http://www.uri.edu/research/gsc/docs/ABI%20Dye%20Set%20card.pdf here] if you are using an Applied Biosytems machine).
 
  With every benefit, there is some cost.  In this case, PCR setup _can_ be a little more complicated.  That said, if you premix you tagged primer, your untagged primer, and the labelled tag, things are easy enough.  Then you just need to add an appropriate amount of this mix to your PCR reaction.
 
@@ -97,4 +97,3 @@ p=subprocess.Popen(pathToPrimer3,shell=True,stdin=subprocess.PIPE,stdout=subproc
 {{{
 TypeError: an integer is required
 }}}
-
