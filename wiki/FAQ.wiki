@@ -12,7 +12,7 @@
 
  Similarly, you can quickly, easily, and inexpensively change entire dye sets, just by purchasing the tags you need in the 'colors' you want.  For example, you can choose to move from DS-30 to DS-33 (see [http://www.uri.edu/research/gsc/docs/ABI%20Dye%20Set%20card.pdf here] if you are using an Applied Biosytems machine).
 
- With every benefit, there is some cost.  In this case, PCR setup _can_ be a little more complicated.  That said, if you premix you tagged primer, your untagged primer, and the labelled tag, things are easy enough.  Then you just need to add an appropriate amount of this mix to your PCR reaction.
+ With every benefit, there is some cost.  In this case, PCR setup _can_ be a little more complicated.  That said, if you premix your tagged primer, your untagged primer, and the labelled tag, things are easy enough.  Then you just need to add an appropriate amount of this mix to your PCR reaction.
 
  You should also remember that results acquired from tagged primers are not equivalent to those acquired from directly-labelled primers.  Theoretically, the tagged fragments will be equivalent in length to the untagged (directly labelled) fragments + the length of the tag.  In practice, things are not always so easy.  So, it is generally easier to make the choice prior to beginning a study and stick with that method.
 
