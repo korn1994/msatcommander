@@ -4,6 +4,18 @@
 ==Does msatcommander work in OS X 10.3?==
  As of version 0.8.0, msatcommander requires OSX 10.4.x
 
+==What are these 'tags' and where do they come from?==
+ The primary reference re: tagging primers is Boutin-Ganache et al. 2001 (see [References]).  Since that article, there have been several others using tags to fluorescently label primers (e.g. Schable et al. 2002).  Travis Glenn provides addtional information re: tagging primers [http://www.uga.edu/srel/DNA_Lab/Universal_Fluorescent_PrimerTags4.pdf here].  Additionally, you may design and attach your own tagged sequences.
+
+==Can I use tagged primers for large studies?==
+ Yes, you can.  We are currently using tagged primers to genotype roughly 2000 individuals @ 16 loci.  The nice thing about tags is that they allow a modular approach to fluorescent genotyping.  If you want/need to change dye 'colors' (due to overlap problems, for instance), it's easy enough - just purchase the tag you need with a new dye attached.  
+
+ Similarly, you can quickly, easily, and inexpensively change entire dye sets, just by purchasing the tags you need in the 'colors' you want.  For example, you can choose to move from DS-30 to DS-33 (see [http://www.uri.edu/research/gsc/docs/ABI%20Dye%20Set%20card.pdf here] if you are using an Applied Biosytems machine.
+
+ With every benefit, there is some cost.  In this case, PCR setup _can_ be a little more complicated.  That said, if you premix you tagged primer, your untagged primer, and the labelled tag, things are easy enough.  Then you just need to add an appropriate amount of this mix to your PCR reaction.
+
+ You should also remember that results acquired from tagged primers are not equivalent to those acquired from directly-labelled primers.  Theoretically, the tagged fragments will be equivalent in length to the untagged (directly labelled) fragments + the length of the tag.  In practice, things are not always so easy.  So, it is generally easier to make the choice prior to beginning a study and stick with that method.
+
 ==How does msatcommander deal with hairpins?==
  This is sort of a loaded question.  msatcommander uses primer3 for primer design.  primer3 takes a non-thermodynamic approach to evaluating self-, pair-, and end-complementarity.  As such, hairpins are evaluated without respect to thermodynamic properties.  
  
@@ -85,3 +97,4 @@ p=subprocess.Popen(pathToPrimer3,shell=True,stdin=subprocess.PIPE,stdout=subproc
 {{{
 TypeError: an integer is required
 }}}
+
