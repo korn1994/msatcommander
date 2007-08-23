@@ -17,7 +17,7 @@
 ==Which tag is 'better'?==
  In my experience, the CAG tag has more desirable properties than the M13R tag.  Generally, M13R causes problems with self-, end-, and pair-complementarity or it introduces hairpins to the primer that is tagged.
 
- You will notice that, in large part, if you choose to tag primers with either CAG or M13R, the software 'chooses' CAG-tagged primers more often.  This is for the reasons given above (largely bases on measures of complementarity).
+ You will notice that, in large part, if you choose to tag primers with either CAG or M13R, the software 'chooses' CAG-tagged primers more often.  This is for the reasons given above (largely based on measures of complementarity).
 
 ==Can I use tagged primers for large studies?==
  Yes, you can.  We are currently using tagged primers to genotype roughly 2000 individuals @ 16 loci.  The nice thing about tags is that they allow a modular approach to fluorescent genotyping.  If you want/need to change dye 'colors' (due to overlap problems, for instance), it's easy enough - just purchase the tag you need with a new dye attached.  
