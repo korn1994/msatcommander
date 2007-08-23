@@ -11,6 +11,7 @@
  These may be found in the source code (mscprimertag.py), as well.  Remember that commond bases (between the 3' end of the tag and 5' end of the primer sequence) will be removed:
 
  {{{CAG    = 'CAGTCGGGCGTCATCA'}}}
+
  {{{M13R  = 'GGAAACAGCTATGACCAT'}}}
 
 ==Which tag is 'better'?==
