@@ -1,6 +1,9 @@
 #summary Frequently Asked Questions
 #labels Featured
 
+==Why?==
+ Because designing and tagging primers is a *very* time-consuming process, if done by hand.  Primer design can be automated, but there was previously not an easy way to tag primers.  msatcommander attempts to do both, easily.
+
 ==Does msatcommander work in OS X 10.3?==
  As of version 0.8.0, msatcommander requires OSX 10.4.x
 
