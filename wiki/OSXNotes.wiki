@@ -17,6 +17,7 @@ You can now make changes to primer features by editing the `primer.py` file.  Th
   # Double-click `Contents`
   # Double-click `Resources`
   # Edit `primer.py` to your liking
+  # Delete `primer.pyc` (and ONLY primer.pyc)
 
 Primer design should support all primer3 1.1.1 features by making additions/changes in this file.  
 
@@ -25,6 +26,4 @@ Feature changes are not currently available for the tagging options.  This is pr
 =Additional Notes=
   * Binary is built with Python 2.5.0
   * py2app was used to build the application bundle
-
-
 
