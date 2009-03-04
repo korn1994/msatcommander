@@ -232,12 +232,12 @@ class fileFunctions:
     
     def printRunData(self):
         #pdb.set_trace()
-        if self.selection == 'All':
-            userChoice = self.selection
-        else:
-            for choice in self.selection:
-                userChoice = (('%s ') % (choice))
-        userChoice = (('You searched for %s microsatellite repeats in the above sequences') % (userChoice))
+        #if self.selection == 'All':
+        #    userChoice = self.selection
+        #else:
+        #    for choice in self.selection:
+        #        userChoice = (('%s ') % (choice))
+        userChoice = (('You searched for %s microsatellite repeats in the above sequences') % (self.selection))
         runTime = time.time() - self.startTime
         runTime = (('Time for execution = %f sec') % (runTime))
         self.csvWriter.writerows([
