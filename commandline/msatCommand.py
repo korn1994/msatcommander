@@ -202,7 +202,7 @@ class fileFunctions:
     
     def fileExceptions(self):
         print "\n***********************************"
-        print "msatcommander\ncommand-lineversion 0.4.5"
+        print "msatcommander\ncommand-lineversion 0.4.6"
         print "**********************************"
         try:
             # have to strip whitespace characters for dragging folders
