@@ -21,7 +21,7 @@ not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, B
 
 import string, re, time, csv, os.path, getopt, sys
 from Bio import SeqIO
-#import pdb
+import pdb
        
 class progressBar:
     """ Creates a text-based progress bar. Call the object with the `print'
@@ -136,7 +136,7 @@ class search:
         
         """Searches for microsatellite sequences (mononucleotide, dinucleotide, 
         trinucleotide, tetranucleotide) in DNA string"""
-        
+        #pdb.set_trace()
         # we will store output for each repeat in dictionary keyed on start base #
         self.msatResults={}                                 
         #print 's.mono ', self.mononucleotide
@@ -149,19 +149,18 @@ class search:
             self.genericMethod(pentanucleotide,'pentanucleotide')
             self.genericMethod(hexanucleotide,'hexanucleotide')      
         else:
-            for searchClass in type:
-                if str(searchClass) == 'Mononucleotide':
-                    self.genericMethod(mononucleotide, 'mononucleotide')        
-                elif str(searchClass) == 'Dinucleotide':
-                    self.genericMethod(dinucleotide,'dinucleotide')              
-                elif str(searchClass) == 'Trinucleotide':
-                    self.genericMethod(trinucleotide,'trinucleotide')
-                elif str(searchClass) == 'Tetranucleotide':             
-                    self.genericMethod(tetranucleotide,'tetranucleotide')
-                elif str(searchClass) == 'Pentanucleotide':               
-                    self.genericMethod(pentanucleotide,'pentanucleotide')
-                elif str(searchClass) == 'Hexanucleotide':
-                    self.genericMethod(hexanucleotide,'hexanucleotide')
+            if str(type) == 'Mononucleotide' or str(type) == 'mononucleotide':
+                self.genericMethod(mononucleotide, 'mononucleotide')        
+            elif str(type) == 'Dinucleotide' or str(type) == 'dinucleotide':
+                self.genericMethod(dinucleotide,'dinucleotide')              
+            elif str(type) == 'Trinucleotide' or str(type) == 'trinucleotide':
+                self.genericMethod(trinucleotide,'trinucleotide')
+            elif str(type) == 'Tetranucleotide' or str(type) == 'tetranucleotide':             
+                self.genericMethod(tetranucleotide,'tetranucleotide')
+            elif str(type) == 'Pentanucleotide' or str(type) == 'pentanucleotide':               
+                self.genericMethod(pentanucleotide,'pentanucleotide')
+            elif str(type) == 'Hexanucleotide' or str(type) == 'hexanucleotide':
+                self.genericMethod(hexanucleotide,'hexanucleotide')
         return self.msatResults
 
 class excelSingleSpace:
@@ -212,10 +211,10 @@ class fileFunctions:
         except:
             print 'File/Directory does not exist!\n\nExiting.'
             sys.exit()
-        if self.selection in ['tetra','penta','hexa', 'All']:
+        if self.selection in ['mononucleotide','dinucleotide','trinucleotide','tetranucleotide','pentanucleotide','hexanucleotide', 'All']:
                 print (('\nYou are searching for %s microsatellite repeats.\n') % (self.selection.upper()))
         else:
-            print "Please choose 'tetra'|'penta'|'hexa' or leave blank for the default (hexa).\n"
+            print "Please choose 'mononucleotide'|'dinucleotide'|'trinucleotide'|'tetranucleotide'|'pentanucleotide'|'hexanucleotide' or leave blank for the default (All).\n"
             sys.exit()
         if not self.outfile:
             self.outfile=os.path.join(os.path.dirname(self.infile),'output.txt')
