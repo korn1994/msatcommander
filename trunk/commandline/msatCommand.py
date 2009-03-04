@@ -21,7 +21,6 @@ not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, B
 
 import string, re, time, csv, os.path, getopt, sys
 from Bio import SeqIO
-import pdb
        
 class progressBar:
     """ Creates a text-based progress bar. Call the object with the `print'
@@ -231,13 +230,7 @@ class fileFunctions:
                 sys.exit()
     
     def printRunData(self):
-        #pdb.set_trace()
-        #if self.selection == 'All':
-        #    userChoice = self.selection
-        #else:
-        #    for choice in self.selection:
-        #        userChoice = (('%s ') % (choice))
-        userChoice = (('You searched for %s microsatellite repeats in the above sequences') % (self.selection))
+        userChoice = (('You searched for %s microsatellite repeats in the above sequences') % (self.selection.upper()))
         runTime = time.time() - self.startTime
         runTime = (('Time for execution = %f sec') % (runTime))
         self.csvWriter.writerows([
