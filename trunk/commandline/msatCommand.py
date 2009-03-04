@@ -21,7 +21,7 @@ not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, B
 
 import string, re, time, csv, os.path, getopt, sys
 from Bio import SeqIO
-import pdb
+#import pdb
        
 class progressBar:
     """ Creates a text-based progress bar. Call the object with the `print'
@@ -321,7 +321,7 @@ def readInfo(inFile, outFile, repeatChoice):
     parser = Fasta.RecordParser()
     infile = open(inFile, 'rU')
     for record in SeqIO.parse(infile,'fasta'):
-        pdb.set_trace()
+        #pdb.set_trace()
         dataOut=search().ephemeris(record.sequence, repeatChoice) 
         dictKeys=dataOut.keys()
         dictKeys.sort()                                     # sorts keys so bp locations will be in order
