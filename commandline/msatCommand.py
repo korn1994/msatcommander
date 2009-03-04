@@ -21,7 +21,7 @@ not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, B
 
 import string, re, time, csv, os.path, getopt, sys
 from Bio import SeqIO
-#from Bio.SeqIO import SequenceIterator
+import pdb
        
 class progressBar:
     """ Creates a text-based progress bar. Call the object with the `print'
@@ -232,9 +232,13 @@ class fileFunctions:
                 sys.exit()
     
     def printRunData(self):
-        for choice in self.selection:
-            userChoice = (('%s ') % (choice))
-        userChoice = (('You searched for all %s microsatellite repeats in the above sequences') % (userChoice))
+        #pdb.set_trace()
+        if self.selection == 'All':
+            userChoice = self.selection
+        else:
+            for choice in self.selection:
+                userChoice = (('%s ') % (choice))
+        userChoice = (('You searched for %s microsatellite repeats in the above sequences') % (userChoice))
         runTime = time.time() - self.startTime
         runTime = (('Time for execution = %f sec') % (runTime))
         self.csvWriter.writerows([
@@ -273,7 +277,7 @@ class fileFunctions:
         self.overallRepeatSequences = []
         # overall repeats list
         self.overallRepeats = []
-        for record in SequenceIterator(handle,"fasta"):
+        for record in SeqIO.parse(handle,"fasta"):
             sequence = search(record.seq.tostring())
             dataOut=sequence.ephemeris(self.selection) 
             dictKeys=dataOut.keys()
@@ -288,7 +292,7 @@ class fileFunctions:
                     dataList = dataOut[k].split()
                     cloneResults = [record.id, ' '.join(dataList[:-7]), dataList[-7], ' '.join(dataList[-6:-3]), dataList[-3], dataList[-2], dataList[-1]]
                     self.csvWriter.writerow(cloneResults)
-            elif not dictKeys and self.noRepeats:
+            elif not dictKeys:
                 cloneResults = [record.id, "No repeats found"]        
                 self.csvWriter.writerow(cloneResults)
             self.sequenceCount +=1
@@ -314,17 +318,10 @@ def readInfo(inFile, outFile, repeatChoice):
     
     file=open(outFile,'w')                                   # opens file for output - append only to keep from overwriting
     file.write('Microsatellite repeats found in the following sequences: \n\n')
-
     parser = Fasta.RecordParser()
-    infile = open(inFile)
-    iterator = Fasta.Iterator(infile, parser)
-    i = 0
-    while 1:
-        record = iterator.next()
-        if not record:
-            break
-            infile.close()
-            file.close()
+    infile = open(inFile, 'rU')
+    for record in SeqIO.parse(infile,'fasta'):
+        pdb.set_trace()
         dataOut=search().ephemeris(record.sequence, repeatChoice) 
         dictKeys=dataOut.keys()
         dictKeys.sort()                                     # sorts keys so bp locations will be in order
@@ -333,7 +330,7 @@ def readInfo(inFile, outFile, repeatChoice):
             for k in dictKeys:                                  # writes dict values for sorted keys to output file
                 dataList = dataOut[k].split()
                 file.write(('%s\t%s\t%s\t%s\n') % (record.title, ' '.join(dataList[:-7]), dataList[-7], ' '.join(dataList[-6:])))
-            file.write(('---------------------------------------%s') % ('\n'))
+            file.write('---------------------------------------\n')
         i += interval
         prog(i)
 
