@@ -140,7 +140,7 @@ class search:
         self.msatResults={}                                 
         #print 's.mono ', self.mononucleotide
         # moved All (slow!) here to keep from double searching
-        if 'All' in type:                          
+        if 'all' in type:                          
             self.genericMethod(mononucleotide, 'mononucleotide')
             self.genericMethod(dinucleotide,'dinucleotide')
             self.genericMethod(trinucleotide,'trinucleotide')
@@ -148,17 +148,17 @@ class search:
             self.genericMethod(pentanucleotide,'pentanucleotide')
             self.genericMethod(hexanucleotide,'hexanucleotide')      
         else:
-            if str(type) == 'Mononucleotide' or str(type) == 'mononucleotide':
+            if str(type) == 'mononucleotide':
                 self.genericMethod(mononucleotide, 'mononucleotide')        
-            elif str(type) == 'Dinucleotide' or str(type) == 'dinucleotide':
+            elif str(type) == 'dinucleotide':
                 self.genericMethod(dinucleotide,'dinucleotide')              
-            elif str(type) == 'Trinucleotide' or str(type) == 'trinucleotide':
+            elif str(type) == 'trinucleotide':
                 self.genericMethod(trinucleotide,'trinucleotide')
-            elif str(type) == 'Tetranucleotide' or str(type) == 'tetranucleotide':             
+            elif str(type) == 'tetranucleotide':             
                 self.genericMethod(tetranucleotide,'tetranucleotide')
-            elif str(type) == 'Pentanucleotide' or str(type) == 'pentanucleotide':               
+            elif str(type) == 'pentanucleotide':               
                 self.genericMethod(pentanucleotide,'pentanucleotide')
-            elif str(type) == 'Hexanucleotide' or str(type) == 'hexanucleotide':
+            elif str(type) == 'hexanucleotide':
                 self.genericMethod(hexanucleotide,'hexanucleotide')
         return self.msatResults
 
@@ -185,7 +185,7 @@ class fileFunctions:
         for o,a in opts:
             if o in ("-i","--input"):self.infile = a
             if o in ("-o","--output"):self.outfile = a
-            if o in ("-s","--search"):self.selection = a
+            if o in ("-s","--search"):self.selection = a.lower()
             if o in ("-h","--help"):
                 self.Usage()
                 sys.exit()
@@ -210,10 +210,10 @@ class fileFunctions:
         except:
             print 'File/Directory does not exist!\n\nExiting.'
             sys.exit()
-        if self.selection in ['mononucleotide','dinucleotide','trinucleotide','tetranucleotide','pentanucleotide','hexanucleotide', 'All']:
+        if self.selection in ['mononucleotide','dinucleotide','trinucleotide','tetranucleotide','pentanucleotide','hexanucleotide', 'all']:
                 print (('\nYou are searching for %s microsatellite repeats.\n') % (self.selection.upper()))
         else:
-            print "Please choose 'mononucleotide'|'dinucleotide'|'trinucleotide'|'tetranucleotide'|'pentanucleotide'|'hexanucleotide' or leave blank for the default (All).\n"
+            print "Please choose 'mononucleotide'|'dinucleotide'|'trinucleotide'|'tetranucleotide'|'pentanucleotide'|'hexanucleotide'|'all' or leave blank for the default (all).\n"
             sys.exit()
         if not self.outfile:
             self.outfile=os.path.join(os.path.dirname(self.infile),'output.txt')
