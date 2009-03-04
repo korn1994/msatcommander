@@ -20,7 +20,8 @@ not, write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330, B
 """
 
 import string, re, time, csv, os.path, getopt, sys
-from Bio.SeqIO import SequenceIterator
+from Bio import SeqIO
+#from Bio.SeqIO import SequenceIterator
        
 class progressBar:
     """ Creates a text-based progress bar. Call the object with the `print'
@@ -251,7 +252,7 @@ class fileFunctions:
 
         handle = open(self.infile,"rU")
         length = 0
-        for record in SequenceIterator(handle,"fasta"):
+        for record in SeqIO.parse(handle,"fasta"):
             length += 1 
         handle.close()
         #length = len(data)/2
