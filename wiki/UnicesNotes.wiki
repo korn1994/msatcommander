@@ -56,7 +56,7 @@ There is also an older, command-line version of msatcommander (msatCommand.py). 
 svn checkout http://msatcommander.googlecode.com/svn/trunk/commandline/ msatcommander
 }}}
 
-You can only scan for 'All' microsatellite classes at the moment using this code.  It is unlikely that I will modify the commandline code to provide the functionality of the GUi code (the GUI stuff is bad enough and, unfortunately, commandline users are largely in the minority.  You may run the code with:
+You can scan for all microsatellite classes.  It is unlikely that I will modify the commandline code to provide the functionality of the GUi code (the GUI stuff is bad enough and, unfortunately, commandline users are largely in the minority).  You may run the code with:
 
 {{{
 python msatCommand.py -i infile.fsa -o outfile.csv -s All
@@ -65,4 +65,4 @@ python msatCommand.py -i infile.fsa -o outfile.csv -s All
 As above, there are several dependencies:
 
   * Python (2.4.x and 2.5.x known to work)
-  * [http://biopython.org/wiki/Download Biopython 1.43] (*MUST* be 1.43 or a current CVS snapshot)
+  * [http://biopython.org/wiki/Download Biopython] (*MUST* be ≥ 1.43)
