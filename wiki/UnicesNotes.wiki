@@ -32,9 +32,9 @@ The `primer3_core` binary should then be copied to the top-level of the director
 
 == Additional dependencies==
 
-  * Python (2.4.3, 2.4.4, and 2.5.0 known to work)
+  * Python (2.4.x, 2.5.x known to work)
   * [http://www.wxpython.org/ wxPython] (version 2.8.xx)
-  * [http://biopython.org/wiki/Download biopython 1.43] (*MUST* be 1.43 or a current CVS snapshot)
+  * [http://biopython.org/wiki/Download Biopython] (*MUST* be ≥ 1.43)
 
 ==Running the GUI==
 
