@@ -175,7 +175,7 @@ class fileFunctions:
     
     def __init__(self):
         # initialize to defaults
-        self.outfile, self.selection = '','All'
+        self.outfile, self.selection = '','all'
         # get options passed on CL
         try:
             opts, args = getopt.getopt(sys.argv[1:], 'i:o:s:vh')
@@ -310,7 +310,6 @@ def readInfo(inFile, outFile, repeatChoice):
     
     file=open(outFile,'w')                                   # opens file for output - append only to keep from overwriting
     file.write('Microsatellite repeats found in the following sequences: \n\n')
-    parser = Fasta.RecordParser()
     infile = open(inFile, 'rU')
     for record in SeqIO.parse(infile,'fasta'):
         #pdb.set_trace()
@@ -463,12 +462,8 @@ if __name__ == '__main__':
         elif repeatClass[:-7]=='hexanucleotide':
             hexanucleotide = tempList
     #-----------------------------------------------------------------------
-    # end global variable definition and compilation and begin main GUI loop    
+    # end variable definition and compilation and begin main loop    
     #-----------------------------------------------------------------------
     userData = fileFunctions()
     userData.fileExceptions()
     userData.RunSearch()
-    #main()
-    #userInput,userOutput,userRepeatChoice = getUserFiles()
-    #readInfo(userInput, userOutput, userRepeatChoice)
-    #print '\n'
