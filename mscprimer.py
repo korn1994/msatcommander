@@ -114,8 +114,8 @@ class primer3:
         primerInfo = outdir + clone
         primerInfo = re.sub('[|,.]+','_',primerInfo) + '_primer.txt'
         if os.name == 'posix':
-            pathToPrettyPrimer3 = (('./primer3_core -format_output < \"%s\" > \"%s\"') % (self.tempPrimer3File, primerInfo))
-            pathToPrimer3 = (('./primer3_core < \"%s\"') % (self.tempPrimer3File))
+            pathToPrettyPrimer3 = './primer3_core -format_output < \"%s\"' % self.tempPrimer3File
+            pathToPrimer3 = './primer3_core < \"%s\"' % self.tempPrimer3File
         elif os.name == 'nt':
             pathToPrettyPrimer3 = 'primer3_core -format_output < \"%s\"' % self.tempPrimer3File
             pathToPrimer3 = 'primer3_core < \"%s\"' % self.tempPrimer3File
