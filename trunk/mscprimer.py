@@ -117,14 +117,13 @@ class primer3:
             pathToPrettyPrimer3 = (('./primer3_core -format_output < \"%s\" > \"%s\"') % (self.tempPrimer3File, primerInfo))
             pathToPrimer3 = (('./primer3_core < \"%s\"') % (self.tempPrimer3File))
         elif os.name == 'nt':
-            pathToPrettyPrimer3 = (('primer3_core -format_output < \"%s\" > \"%s\"') % (self.tempPrimer3File, primerInfo))
-            pathToPrimer3 = (('primer3_core < \"%s\"') % (self.tempPrimer3File))
-        # use new subprocess modules to allow things to run on windows - argh.
+            pathToPrettyPrimer3 = 'primer3_core -format_output < \"%s\"' % self.tempPrimer3File
+            pathToPrimer3 = 'primer3_core < \"%s\"' % self.tempPrimer3File
         #pdb.set_trace()
-        subprocess.Popen(pathToPrettyPrimer3,shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)    
-        p=subprocess.Popen(pathToPrimer3,shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,universal_newlines=True).stdout
-        primer3Output = p.read()
-        p.close()
+        pretty_output = open(primerInfo, 'w')
+        pretty = subprocess.Popen(pathToPrettyPrimer3, shell=True, stdout=pretty_output)
+        pretty_output.close()
+        primer3Output, primer3StdErr=subprocess.Popen(pathToPrimer3,shell=True,stdout=subprocess.PIPE,universal_newlines=True).communicate()
         primer3Output = primer3Output.split('\n')
         #primer3Output=os.popen(pathToPrimer3).read().split('\n')
         primer0specs = {
@@ -187,6 +186,7 @@ class primer3:
             pass
         # remove tempfile
         try:
+            #pdb.set_trace()
             os.remove(self.tempPrimer3File)
         except OSError:
             time.sleep(0.1)
