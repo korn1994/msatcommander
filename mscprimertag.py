@@ -213,7 +213,7 @@ class primerInfo:
             pathToPrimer3 = (('./primer3_core < \"%s\"') % (tempfile))
         elif os.name == 'nt':
             pathToPrimer3 = (('primer3_core < \"%s\"') % (tempfile))
-        p=subprocess.Popen(pathToPrimer3,shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,universal_newlines=True).stdout
+        p=subprocess.Popen(pathToPrimer3,shell=True,stdout=subprocess.PIPE,universal_newlines=True).stdout
         primer3Output = p.read()
         p.close()
         primer3Output = primer3Output.split('\n')
