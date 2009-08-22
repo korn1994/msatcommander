@@ -22,4 +22,4 @@ Hopefully, I will be able to incorporate most changes into the GUI, when I have 
   * wxPython 2.8
   * BioPython 1.51
   * py2exe 0.6.9 was used to build the actual executable
-  * source code (used as modules) are included in the archive files 
+  * source code (used as modules) are included in the tar.gz archive files 
