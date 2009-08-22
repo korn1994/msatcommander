@@ -50,17 +50,19 @@ depending on your python installation and environment.
 
 = Command-line version =
 
-There is also a command-line version of msatcommander (msatCommand.py).  This version ONLY locates microsatellite repeats, and the new repeat-finding code within this module will be integrated to the GUI version at some point in the near future.  Additionally, the msat-finding code is implemented as a set of classes that can be applied to custom/more general problem.  msatCommand.py is currently available from the trunk svn directory:
+There is also a command-line version of msatcommander (msatCommand.py).  This version ONLY locates microsatellite repeats, and the new repeat-finding code within this module will be integrated to the GUI version at some point in the near future.  Additionally, the msat-finding code is implemented as a set of classes (seqsearch.py) that can be applied to custom/more general problems.  msatCommand.py is currently available from the trunk svn directory:
 
 {{{
 svn checkout http://msatcommander.googlecode.com/svn/trunk/commandline/ msatcommander
 }}}
 
-Calling msatCommand.py without any arguments will display the help.
+Calling msatCommand.py without any arguments will display the help:
 
 {{{
 python msatCommand.py
 }}}
+
+Check the docstrings/comments of seqsearch.py for more information about how to use it.
 
 As above, there are several dependencies:
 
