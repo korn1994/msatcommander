@@ -5,7 +5,7 @@ setup.py - script for building MyApplication
 Usage:
     % python setup.py py2app
 """
-from distutils.core import setup
+
 import os, sys
 
 MODULE_EXCLUDES =[
@@ -46,18 +46,21 @@ MODULE_EXCLUDES =[
 'pydoc']
 
 if os.name == 'posix':
+    from distutils.core import setup
+    import py2app
     setup(
-        name='msatcommander',
+        name='msatcommander-0.8.2',
         version='0.8.2',
         description='python searching of fasta files for microsat repeats',
         author='Brant C. Faircloth',
-        author_email='brant@uga.edu',
+        author_email='brant@ucla.edu',
         license='GPL',
         app=['msatcommander.py'],
         setup_requires=["py2app"],
         options=dict(py2app=dict(
-                packages=['Bio'],
-                resources=['primer3-1.1.1/src/primer3_core',
+                excludes=MODULE_EXCLUDES,
+                resources=['primer3_core',
+                'misprime_lib_weight',
                 'mscGui.xrc', 
                 'mscfunc.py',
                 'mscprimer.py',
@@ -80,13 +83,12 @@ elif os.name == 'nt':
         }
     setup(
         options=opts,
-        #data_files=[("",["mscGui.xrc","mscfunc.py","mscprimer.py","mscprimertag.py","repeatClasses.py","primer.py",])],
         data_files = [("",["mscGui.xrc"])],
-        name='msatcommander',
+        name='msatcommander-0.8.2',
         version='0.8.2',
         description='python searching of fasta files for microsat repeats',
         author='Brant C. Faircloth',
-        author_email='brant@uga.edu',
+        author_email='brant@ucla.edu',
         license='GPL',
         zipfile=None,
         windows=[
