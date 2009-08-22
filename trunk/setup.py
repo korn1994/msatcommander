@@ -84,7 +84,7 @@ elif os.name == 'nt':
         }
     setup(
         options=opts,
-        data_files = [("",["mscGui.xrc"])],
+        data_files = [("",["mscGui.xrc", "misprime_lib_weight", "primer3_core.exe"])],
         name='msatcommander-0.8.2',
         version='0.8.2',
         description='python searching of fasta files for microsat repeats',

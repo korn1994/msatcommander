@@ -61,7 +61,7 @@ file src/gpl.txt or go to http://www.gnu.org/licenses/gpl.txt.
 ==================
 
 """
-import sys, os, string, csv, subprocess, time, pdb
+import sys, os, string, csv, subprocess, time
 
 class mods: 
     """class defining several methods we will use to modify dna sequence.""" 
