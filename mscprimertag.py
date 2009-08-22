@@ -116,18 +116,33 @@ class tagMain:
         #-------------------------------------------------------------------------------------
         
     def commonBases(self, tag, primer):
-        """returns tag; checks primer and tag for common bases and removes them"""
-        self.tag = tag
-        self.common = False
-        i=5
-        while i > 0:
-            if self.tag.endswith(primer[0:i]):
-                self.tag = self.tag.rstrip(primer[0:i])
-                self.common = True
-                break
-            else:
-                i -= 1
-        return self.tag 
+        '''checks primer and tag for common bases and removes them'''
+        self.common, index = False, None
+        for i in range(1,len(primer)):
+            frag = primer[0:i]
+            if tag.endswith(frag):
+                index = i
+        if index:
+            self.tag = tag[:-index]
+            self.common = True
+        else:
+            self.tag = tag
+        # not sure why this is needed
+        return self.tag
+    
+    #def commonBases(self, tag, primer):
+    #    """returns tag; checks primer and tag for common bases and removes them"""
+    #    self.tag = tag
+    #    self.common = False
+    #    i=5
+    #    while i > 0:
+    #        if self.tag.endswith(primer[0:i]):
+    #            self.tag = self.tag.rstrip(primer[0:i])
+    #            self.common = True
+    #            break
+    #        else:
+    #            i -= 1
+    #    return self.tag 
     
     def writeFile(self, outDir):
         """function builds temporary output file to be used by primer 3, subclassed below"""
