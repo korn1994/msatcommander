@@ -46,6 +46,7 @@ MODULE_EXCLUDES =[
 'pydoc']
 
 if os.name == 'posix':
+    # use hdiutil create -srcfolder ../dist msatcommander-0.X.X to create .dmg
     from distutils.core import setup
     import py2app
     setup(
