@@ -41,6 +41,7 @@ class MyApp(wx.App):
         self.combineArraysFlag      = False                     # for safety (GUI default is false)
         self.designPrimersFlag      = False
         self.tagPrimersFlag         = False
+        self.pigtailPrimersFlag     = False
         self.combDistance           = 50
         self.infile                 = False
         self.outfile                = False
@@ -86,6 +87,7 @@ class MyApp(wx.App):
         self.frame.Bind(wx.EVT_TEXT, self.onCombineDistance, self.combDistanceBox)
         self.frame.Bind(wx.EVT_CHECKBOX, self.onDesignPrimers, id=wx.xrc.XRCID('designPrimers'))
         self.frame.Bind(wx.EVT_CHECKBOX, self.onTagPrimers, id=wx.xrc.XRCID('tagPrimers'))
+        self.frame.Bind(wx.EVT_CHECKBOX, self.onPigtailPrimers, id=wx.xrc.XRCID('pigtailPrimers'))
         self.frame.Bind(wx.EVT_CHECKBOX, self.onCagTag, id=wx.xrc.XRCID('cagTag'))
         self.frame.Bind(wx.EVT_CHECKBOX, self.onM13Tag, id=wx.xrc.XRCID('m13Tag'))
         self.customBox = wx.xrc.XRCCTRL(self.mainPanel, 'customTag')
@@ -182,7 +184,7 @@ class MyApp(wx.App):
         tagprimer = mscprimertag.primer3Tag(self.outDir,self.primerin)
         tagprimer.getData()
         #print 'custom tag is:', self.custom
-        tagprimer.run(self.cag, self.m13, self.custom)
+        tagprimer.run(self.cag, self.m13, self.custom, self.pigtailPrimersFlag)
         self.runEnd()
     
     def getPrimers(self):
@@ -265,6 +267,13 @@ class MyApp(wx.App):
             self.tagPrimersFlag = True
         else:
             self.tagPrimersFlag = False
+    
+    def onPigtailPrimers(self,evt):
+        index = evt.GetSelection()
+        if index:
+            self.pigtailPrimersFlag = True
+        else:
+            self.pigtailPrimersFlag = False
             
     def onCombineArrays(self,evt):
         index = evt.GetSelection()
