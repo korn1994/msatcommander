@@ -302,7 +302,7 @@ class primer3Tag:
             output.writerow(buildList)
         else: pass
 
-    def run(self, cag, m13, custom):
+    def run(self, cag, m13, custom, pigtail):
         outputFile = self.tagResults
         outputData = open(outputFile,'w')
         output_writer = csv.writer(outputData, dialect = excelSingleSpace)
@@ -361,14 +361,15 @@ class primer3Tag:
                 if primerPicks[0][1] != 1000:
                     goodPrimer = resultsDict[primerPicks[0][1]]        #choose MINIMUM primer penalty value and keep that record     
                     #pdb.set_trace()
-                    if goodPrimer['PRIMER_LEFT_INPUT'].startswith(cagTag) or goodPrimer['PRIMER_LEFT_INPUT'].startswith(m13rTag):
-                        opposite = goodPrimer['PRIMER_RIGHT_INPUT']
-                        name = 'PRIMER_RIGHT_INPUT'
-                    else:
-                        opposite = goodPrimer['PRIMER_LEFT_INPUT']
-                        name = 'PRIMER_LEFT_INPUT'
-                    pigtailed, pigtail = common('GTTT', opposite)
-                    goodPrimer[name] = pigtail + opposite
+                    if pigtail:
+                        if goodPrimer['PRIMER_LEFT_INPUT'].startswith(cagTag) or goodPrimer['PRIMER_LEFT_INPUT'].startswith(m13rTag):
+                            opposite = goodPrimer['PRIMER_RIGHT_INPUT']
+                            name = 'PRIMER_RIGHT_INPUT'
+                        else:
+                            opposite = goodPrimer['PRIMER_LEFT_INPUT']
+                            name = 'PRIMER_LEFT_INPUT'
+                        pigtailed, tail = common('GTTT', opposite)
+                        goodPrimer[name] = tail + opposite
                     self.writeData(item[0],goodPrimer,header,output_writer)
                 else:
                     pass

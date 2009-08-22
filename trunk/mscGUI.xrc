@@ -65,7 +65,7 @@
                                   </content>
                                   <value>10</value>
                                   <pos>300,0</pos>
-                                  <style></style>
+                                  <style/>
                                   <font>
                                     <size>10</size>
                                     <family>default</family>
@@ -84,7 +84,7 @@
                               <object class="sizeritem">
                                 <object class="wxStaticText" name="diLengthText">
                                   <label>Dinuc Repeat Length</label>
-                                  <style></style>
+                                  <style/>
                                 </object>
                                 <flag>wxALIGN_CENTRE_VERTICAL</flag>
                               </object>
@@ -112,7 +112,7 @@
                               <object class="sizeritem">
                                 <object class="wxStaticText" name="triLengthText">
                                   <label>Trinuc Repeat Length</label>
-                                  <style></style>
+                                  <style/>
                                 </object>
                                 <flag>wxALIGN_CENTRE_VERTICAL</flag>
                               </object>
@@ -139,7 +139,7 @@
                               <object class="sizeritem">
                                 <object class="wxStaticText" name="tetraLengthText">
                                   <label>Tetranuc Repeat Length</label>
-                                  <style></style>
+                                  <style/>
                                 </object>
                                 <flag>wxALIGN_CENTRE_VERTICAL</flag>
                               </object>
@@ -166,7 +166,7 @@
                               <object class="sizeritem">
                                 <object class="wxStaticText" name="pentaLengthText">
                                   <label>Pentanuc Repeat Length</label>
-                                  <style></style>
+                                  <style/>
                                 </object>
                                 <flag>wxALIGN_CENTRE_VERTICAL</flag>
                               </object>
@@ -193,7 +193,7 @@
                               <object class="sizeritem">
                                 <object class="wxStaticText" name="hexaLengthText">
                                   <label>Hexanuc Repeat Length</label>
-                                  <style></style>
+                                  <style/>
                                 </object>
                                 <flag>wxALIGN_CENTRE_VERTICAL</flag>
                               </object>
@@ -249,7 +249,7 @@
                     <flag>wxALIGN_CENTRE_VERTICAL</flag>
                   </object>
                   <object class="spacer">
-                    <size>75,40</size>
+                    <size>20,40</size>
                   </object>
                   <object class="sizeritem">
                     <object class="wxStaticText" name="distanceText">
@@ -263,13 +263,13 @@
                   </object>
                   <object class="sizeritem">
                     <object class="wxTextCtrl" name="combinationDistance">
+                      <size>45,20</size>
                       <value>50</value>
-                      <size>55,20</size>
                     </object>
                     <flag>wxALIGN_CENTRE_VERTICAL</flag>
                   </object>
                   <object class="spacer">
-                    <size>73,40</size>
+                    <size>15,30</size>
                   </object>
                   <object class="sizeritem">
                     <object class="wxCheckBox" name="designPrimers">
@@ -279,7 +279,16 @@
                     <flag>wxALIGN_CENTRE_VERTICAL</flag>
                   </object>
                   <object class="spacer">
-                    <size>2,40</size>
+                    <size>15,40</size>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxCheckBox" name="tagPrimers">
+                      <label>Tag Primers</label>
+                    </object>
+                    <flag>wxALIGN_CENTRE_VERTICAL</flag>
+                  </object>
+                  <object class="spacer">
+                    <size>15,40</size>
                   </object>
                 </object>
                 <style>wxSUNKEN_BORDER</style>
@@ -305,16 +314,8 @@
                 <pos>5,25</pos>
                 <object class="wxBoxSizer">
                   <orient>wxHORIZONTAL</orient>
-                  <object class="sizeritem">
-                    <object class="wxCheckBox" name="tagPrimers">
-                      <label>Tag Primers</label>
-                      <checked>0</checked>
-                    </object>
-                    <flag>wxALIGN_CENTRE_VERTICAL</flag>
-                  </object>
-                  <object class="spacer">
-                    <size>15,40</size>
-                  </object>
+                  
+                  
                   <object class="sizeritem">
                     <object class="wxCheckBox" name="cagTag">
                       <label>CAG Tag</label>
@@ -354,6 +355,12 @@
                   <object class="spacer">
                     <size>5,40</size>
                   </object>
+                  <object class="sizeritem">
+                    <object class="wxCheckBox" name="pigtailPrimers">
+                      <label>Pigtail Primers</label>
+                    </object>
+                    <flag>wxALIGN_CENTRE_VERTICAL</flag>
+                  </object>
                 </object>
                 <style>wxSUNKEN_BORDER</style>
               </object>
@@ -377,7 +384,7 @@
                       <object class="wxButton" name="fileOpen">
                         <label>Select File to Scan</label>
                         <pos>30,5</pos>
-                        <style></style>
+                        <style/>
                       </object>
                     </object>
                     <minsize>170,30</minsize>
@@ -411,7 +418,7 @@
           <minsize>550,100</minsize>
         </object>
       </object>
-      <style></style>
+      <style/>
     </object>
     <size>555,510</size>
     <style>wxDEFAULT_FRAME_STYLE</style>
