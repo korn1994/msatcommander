@@ -1,6 +1,14 @@
 #summary Changelog for msatcommander (formerly msatFinder)
 #labels Featured
 
+= 0.8.2 =
+  * fixed issue with improper treatment of overlapping bases btw. primer and tag
+  * fixed issue with improper selection of repeat regions as primer binding sites using a custom mispriming file
+  * added ability to GTTT 'pigtail' the non-tagged primer
+  * updated Primer3 to version 1.1.4
+  * updated code to work with Python 2.5 on both platforms
+  * Thanks go to Travis Glenn, Stacey Lance, Ken Jones, and Rick Noyes for pointing out bugs/enhancements
+
 = 0.8.1 =
   * changes to the code to support windows build (uses subprocess.Popen)
   * fixed an issue with spaces in directory names
