@@ -1,9 +1,9 @@
 #summary Windows XP Specific Notes and Details
 
-There is now a beta version of a windows executable available (see downloads section).  There are some known issues with this version.  These are:
+There is no installer for the Windows XP Distribution:
 
-  * you must unzip the archive somewhere... there is not an installer at this point.
-  * ensure you add the '.csv' to the filename in the save-file dialog
+  * just unzip the archive somewhere you like.  Make sure to leave all of the files in the unzipped folder.
+  * if you are only searching for repeats, ensure you add the '.csv' to the filename in the save-file dialog
 
 =Installation=
  
@@ -13,14 +13,13 @@ There is now a beta version of a windows executable available (see downloads sec
 
 =Editing Primer Features=
 
-You can now make changes to primer features by editing the `primer.py` file.  However, be careful not to remove/change the items where indicated.  Primer design should support all primer3 1.1.1 features by making additions/changes in this file.
+After much investigation, I've not determined an easy way to allow editing of the primer features in primer.py (thanks for Rick Noyes for pointing out the problem).  Although this is possible on OS X by editing the files in the application bundle, it doesn't appear to be possible on the WinXP version, because of the way in which the EXE is built.
 
-*After changing primer.py, you will need to delete primer.pyc (make sure to delete _only_ the PRIMER.PYC file) to institute the changes*.  The OS _should_ regenerate this file (primer.pyc). 
-
-Feature changes are not currently available for the tagging options.  This is primarily because primer3 is somewhat picky with which values get input to the program. An incorrect addition could render the program useless and/or give you primers that do not work at all.  This is generally bad.
+Hopefully, I will be able to incorporate most changes into the GUI, when I have a chance.
 
 =Additional Notes=
-  * Binary is built using Enthought Python 2.4.3 (not 2.5.0 as for OSX version).  
-  ** This is because the installer for wxPython has not been updated for Python 2.5 at present
-  * py2exe was used to build the actual executable
+  * Binary is built using Python 2.5.4
+  * wxPython 2.8
+  * BioPython 1.51
+  * py2exe 0.6.9 was used to build the actual executable
   * source code (used as modules) are included in the archive files 
