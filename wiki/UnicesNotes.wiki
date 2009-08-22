@@ -32,9 +32,9 @@ The `primer3_core` binary should then be copied to the top-level of the director
 
 == Additional dependencies==
 
-  * Python (2.4.x, 2.5.x known to work)
+  * Python (2.5.x known to work)
   * [http://www.wxpython.org/ wxPython] (version 2.8.xx)
-  * [http://biopython.org/wiki/Download Biopython] (*MUST* be ≥ 1.43)
+  * [http://biopython.org/wiki/Download Biopython] > 1.50
 
 ==Running the GUI==
 
@@ -50,19 +50,19 @@ depending on your python installation and environment.
 
 = Command-line version =
 
-There is also an older, command-line version of msatcommander (msatCommand.py).  This is currently available from the trunk svn directory:
+There is also a command-line version of msatcommander (msatCommand.py).  This version ONLY locates microsatellite repeats, and the new repeat-finding code within this module will be integrated to the GUI version at some point in the near future.  Additionally, the msat-finding code is implemented as a set of classes that can be applied to custom/more general problem.  msatCommand.py is currently available from the trunk svn directory:
 
 {{{
 svn checkout http://msatcommander.googlecode.com/svn/trunk/commandline/ msatcommander
 }}}
 
-You can scan for all microsatellite classes.  It is unlikely that I will modify the commandline code to provide the functionality of the GUi code (the GUI stuff is bad enough and, unfortunately, commandline users are largely in the minority).  You may run the code with:
+Calling msatCommand.py without any arguments will display the help.
 
 {{{
-python msatCommand.py -i infile.fsa -o outfile.csv -s All
+python msatCommand.py
 }}}
 
 As above, there are several dependencies:
 
-  * Python (2.4.x and 2.5.x known to work)
-  * [http://biopython.org/wiki/Download Biopython] (*MUST* be ≥ 1.43)
+  * Python (2.5.x known to work)
+  * [http://biopython.org/wiki/Download Biopython] > 1.50
