@@ -61,7 +61,7 @@ file src/gpl.txt or go to http://www.gnu.org/licenses/gpl.txt.
 ==================
 
 """
-import sys, os, string, csv, subprocess, time
+import sys, os, string, csv, subprocess, time, pdb
 
 class mods: 
     """class defining several methods we will use to modify dna sequence.""" 
@@ -92,6 +92,22 @@ class mods:
         self.seq = (''.join(listS))
         return self.complement()
         
+
+def common(tag, primer):
+    '''checks primer and tag for common bases and removes them'''
+    common, index = False, None
+    for i in range(1,len(primer)):
+        frag = primer[0:i]
+        if tag.endswith(frag):
+            index = i
+    if index:
+        tag = tag[:-index]
+        common = True
+    else:
+        tag = tag
+    # not sure why this is needed
+    return common, tag
+
 class tagMain:
     """main class for sequence building and input file construction"""
     #--------------------------------------------------------------------------------------
@@ -117,32 +133,8 @@ class tagMain:
         
     def commonBases(self, tag, primer):
         '''checks primer and tag for common bases and removes them'''
-        self.common, index = False, None
-        for i in range(1,len(primer)):
-            frag = primer[0:i]
-            if tag.endswith(frag):
-                index = i
-        if index:
-            self.tag = tag[:-index]
-            self.common = True
-        else:
-            self.tag = tag
-        # not sure why this is needed
+        self.common, self.tag = common(tag, primer)
         return self.tag
-    
-    #def commonBases(self, tag, primer):
-    #    """returns tag; checks primer and tag for common bases and removes them"""
-    #    self.tag = tag
-    #    self.common = False
-    #    i=5
-    #    while i > 0:
-    #        if self.tag.endswith(primer[0:i]):
-    #            self.tag = self.tag.rstrip(primer[0:i])
-    #            self.common = True
-    #            break
-    #        else:
-    #            i -= 1
-    #    return self.tag 
     
     def writeFile(self, outDir):
         """function builds temporary output file to be used by primer 3, subclassed below"""
@@ -312,7 +304,7 @@ class primer3Tag:
 
     def run(self, cag, m13, custom):
         outputFile = self.tagResults
-        outputData = open(outputFile,'w')                              # open datafile for read
+        outputData = open(outputFile,'w')
         output_writer = csv.writer(outputData, dialect = excelSingleSpace)
         header = [
         'Clone',
@@ -362,12 +354,21 @@ class primer3Tag:
                 primerPicks=[]
                 for element in resultsDict:
                     try:
-                        primerPicks.append((resultsDict[element]['PRIMER_PAIR_PENALTY'],element))                                             
+                        primerPicks.append((resultsDict[element]['PRIMER_PAIR_PENALTY'],element))
                     except:
                         primerPicks.append(('1000',1000))  #insert arbitrarily bad value to list for primer w/ no results
                 primerPicks.sort()
                 if primerPicks[0][1] != 1000:
                     goodPrimer = resultsDict[primerPicks[0][1]]        #choose MINIMUM primer penalty value and keep that record     
+                    #pdb.set_trace()
+                    if goodPrimer['PRIMER_LEFT_INPUT'].startswith(cagTag) or goodPrimer['PRIMER_LEFT_INPUT'].startswith(m13rTag):
+                        opposite = goodPrimer['PRIMER_RIGHT_INPUT']
+                        name = 'PRIMER_RIGHT_INPUT'
+                    else:
+                        opposite = goodPrimer['PRIMER_LEFT_INPUT']
+                        name = 'PRIMER_LEFT_INPUT'
+                    pigtailed, pigtail = common('GTTT', opposite)
+                    goodPrimer[name] = pigtail + opposite
                     self.writeData(item[0],goodPrimer,header,output_writer)
                 else:
                     pass
