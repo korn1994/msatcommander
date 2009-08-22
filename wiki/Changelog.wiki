@@ -8,6 +8,7 @@
   * added ability to GTTT 'pigtail' the non-tagged primer (see Browstein et al. 1996 in [References])
   * updated Primer3 to version 1.1.4
   * updated code to work with Python 2.5 on both platforms
+  * decreased size of binaries
   * Thanks go to Travis Glenn, Stacey Lance, Ken Jones, and Rick Noyes for pointing out bugs and/or requesting enhancements
 
 = 0.8.1 =
