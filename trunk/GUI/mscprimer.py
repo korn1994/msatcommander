@@ -62,7 +62,7 @@ file src/gpl.txt or go to http://www.gnu.org/licenses/gpl.txt.
 
 """
 
-import sys, os, csv, re, primer, subprocess, time
+import sys, os, csv, re, primer, subprocess, time, pdb
 from Bio import SeqIO
 #----------------------------------------------------------------------
 # get files with repeats from excel spreadsheet output by msatCommander
@@ -111,8 +111,7 @@ class primer3:
         #------------------------
     
     def search(self, clone, writer, outdir):
-        primerInfo = outdir + clone
-        primerInfo = re.sub('[|,.]+','_',primerInfo) + '_primer.txt'
+        primerInfo = outdir + re.sub('[|,.]+','_',clone) + '_primer.txt'
         if os.name == 'posix':
             pathToPrettyPrimer3 = './primer3_core -format_output < \"%s\"' % self.tempPrimer3File
             pathToPrimer3 = './primer3_core < \"%s\"' % self.tempPrimer3File
