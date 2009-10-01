@@ -1,5 +1,5 @@
 #summary msatprimer default primer picking values
-|| PRIMER_PRODUCT_SIZE_RANGE || 150-250 100-300 301-400 401-500 ||
+|| PRIMER_PRODUCT_SIZE_RANGE || 150-450 ||
 || PRIMER_MIN_TM  || 57.0 ||
 || PRIMER_MAX_TM || 62.0 ||
 ||PRIMER_OPT_TM||60.0||
@@ -21,4 +21,3 @@
 ||PRIMER_MAX_POLY_X||4||
 ||PRIMER_EXPLAIN_FLAG||1||
 ||PRIMER_NUM_RETURN||4||
-
