@@ -8,7 +8,7 @@ Copyright (c) 2009 Brant Faircloth. All rights reserved.
 """
 
 import re
-#import pdb
+import pdb
 import string
 from Bio.Seq import Seq
 
@@ -130,6 +130,7 @@ class RegionSearch:
                 temp_match += (m.span(),)
             if temp_match:
                 self.matches[msat.motif[repeat]] = temp_match
+        #pdb.set_trace()
                 
     def microsatellite(self, msat):
         '''Sequence instance search method
