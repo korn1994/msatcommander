@@ -1,0 +1,1555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>msatcommander</class>
+ <widget class="QDialog" name="msatcommander">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>522</width>
+    <height>546</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>msatcommander-1.0.0-alpha</string>
+  </property>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>501</width>
+     <height>491</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <property name="usesScrollButtons">
+    <bool>false</bool>
+   </property>
+   <widget class="QWidget" name="tab">
+    <attribute name="title">
+     <string>General</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>221</width>
+       <height>248</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Search Parameters</string>
+     </property>
+     <widget class="QCheckBox" name="dinucCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>46</y>
+        <width>115</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dinucleotide</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="pentanucCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>121</y>
+        <width>120</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Pentanucleotide</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="trinucCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>71</y>
+        <width>120</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Trinucleotide</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="hexanucCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>146</y>
+        <width>120</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Hexanucleotide</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="tetranucCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>96</y>
+        <width>120</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tetranucleotide</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="combineLociCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>215</y>
+        <width>131</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Combine Loci</string>
+      </property>
+     </widget>
+     <widget class="Line" name="line">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>180</y>
+        <width>201</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="perfectRepeatsCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>190</y>
+        <width>131</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Perfect Repeats</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="mononucCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>21</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Mononucleotide</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="mononucSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>25</y>
+        <width>51</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>10</number>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="dinucSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>50</y>
+        <width>51</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>8</number>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="trinucSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>75</y>
+        <width>51</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>8</number>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="tetranucSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>100</y>
+        <width>51</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>6</number>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="pentanucSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>125</y>
+        <width>51</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>6</number>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="hexanucSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>150</y>
+        <width>51</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>6</number>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="combineLociDistanceSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>217</y>
+        <width>51</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>5000</number>
+      </property>
+      <property name="value">
+       <number>50</number>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>250</y>
+       <width>221</width>
+       <height>201</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Primer Design</string>
+     </property>
+     <widget class="QCheckBox" name="designPrimersCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>151</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Design Primers</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="tagPrimersCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>151</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tag Primers</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="pigtailPrimersCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>150</y>
+        <width>171</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Pigtail Primers</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="cagTagCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>70</y>
+        <width>151</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>CAG Tag</string>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="m13rCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>90</y>
+        <width>151</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>M13R Tag</string>
+      </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="customTagCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>110</y>
+        <width>151</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Custom Tag</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="customTagLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>130</y>
+        <width>160</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="inputMethodHints">
+       <set>Qt::ImhNone</set>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="pigtailPrimersTagLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>170</y>
+        <width>160</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="inputMethodHints">
+       <set>Qt::ImhNone</set>
+      </property>
+      <property name="text">
+       <string>GTTT</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="geometry">
+      <rect>
+       <x>265</x>
+       <y>0</y>
+       <width>220</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Output</string>
+     </property>
+     <widget class="QRadioButton" name="commaSeparatedRadioButton">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>151</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Comma-Separated</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="tabDelimitedRadioButton">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>50</y>
+        <width>151</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tab-Delimited</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="geometry">
+      <rect>
+       <x>265</x>
+       <y>80</y>
+       <width>220</width>
+       <height>112</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Output Files</string>
+     </property>
+     <widget class="QCheckBox" name="taggedPrimersCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>80</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tagged Primers</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="combinedRepeatsCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>40</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Combined Repeats</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="primersCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>60</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Primers</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="repeatsCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Repeats</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_8">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>110</y>
+        <width>161</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>GroupBox</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_9">
+     <property name="geometry">
+      <rect>
+       <x>265</x>
+       <y>190</y>
+       <width>220</width>
+       <height>65</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Database</string>
+     </property>
+     <widget class="QCheckBox" name="keepDatabaseCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>22</y>
+        <width>151</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Keep Database</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="keepDbaseSequenceRecords">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>40</y>
+        <width>171</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Keep Sequence Records</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_3">
+    <attribute name="title">
+     <string>Advanced</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox_5">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>80</y>
+       <width>190</width>
+       <height>105</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Primer Sizes (BP)</string>
+     </property>
+     <widget class="QSpinBox" name="primerMinSizeSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>22</y>
+        <width>58</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>15</number>
+      </property>
+      <property name="maximum">
+       <number>30</number>
+      </property>
+      <property name="value">
+       <number>18</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>24</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Primer Min Size</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Primer Opt Size</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="primerOptSizeSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>48</y>
+        <width>58</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>15</number>
+      </property>
+      <property name="maximum">
+       <number>30</number>
+      </property>
+      <property name="value">
+       <number>20</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>76</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Primer Max Size</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="primerMaxSizeSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>74</y>
+        <width>58</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>15</number>
+      </property>
+      <property name="maximum">
+       <number>30</number>
+      </property>
+      <property name="value">
+       <number>22</number>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_6">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>481</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Product Size</string>
+     </property>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>38</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Product Size</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="primerProductSizeTextBox">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>40</y>
+        <width>371</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>100-450</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>63</y>
+        <width>371</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Space separated list of ranges.  E.g.:  100-200 200-300 300-400</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_7">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>190</y>
+       <width>190</width>
+       <height>105</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Primer Tms (Celsius)</string>
+     </property>
+     <widget class="QSpinBox" name="primerMinTmSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>22</y>
+        <width>58</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>45</number>
+      </property>
+      <property name="maximum">
+       <number>150</number>
+      </property>
+      <property name="value">
+       <number>58</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>24</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Primer Min Tm</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Primer Opt Tm</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="primerOptTmSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>48</y>
+        <width>58</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>45</number>
+      </property>
+      <property name="maximum">
+       <number>150</number>
+      </property>
+      <property name="value">
+       <number>60</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>76</y>
+        <width>111</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Primer Max Tm</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="primerMaxTmSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>74</y>
+        <width>58</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>45</number>
+      </property>
+      <property name="maximum">
+       <number>150</number>
+      </property>
+      <property name="value">
+       <number>62</number>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_10">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>300</y>
+       <width>190</width>
+       <height>78</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>GC Content (%)</string>
+     </property>
+     <widget class="QSpinBox" name="primerMinGcSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>21</y>
+        <width>58</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>50</number>
+      </property>
+      <property name="value">
+       <number>30</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>24</y>
+        <width>110</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Primer Min GC</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="primerMaxGcSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>47</y>
+        <width>58</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>50</number>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>70</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>110</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Primer Max GC</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_11">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>380</y>
+       <width>190</width>
+       <height>55</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>PolyX (BP)</string>
+     </property>
+     <widget class="QSpinBox" name="primerMaxPolyXSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>23</y>
+        <width>58</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>6</number>
+      </property>
+      <property name="value">
+       <number>3</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>27</y>
+        <width>101</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Max polyX</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_12">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>80</y>
+       <width>201</width>
+       <height>181</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Complementarity (Celsius)</string>
+     </property>
+     <widget class="QSpinBox" name="primerMaxSelfAnySpinBox">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>22</y>
+        <width>58</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>45</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>24</y>
+        <width>121</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Max, self, any</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="primerMaxSelfEndSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>48</y>
+        <width>58</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>40</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>121</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Max, self, end</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="primerMaxPairAnySpinBox">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>100</y>
+        <width>58</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>45</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_14">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>102</y>
+        <width>121</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Max, pair, any</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="primerMaxPairEndSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>126</y>
+        <width>58</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>40</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_15">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>128</y>
+        <width>121</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Max, pair, end</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="primerMaxSelfHairpinSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>74</y>
+        <width>58</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>24</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_16">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>76</y>
+        <width>121</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Max, self, hairpin</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="primerMaxPairHairpinSpinBox">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>152</y>
+        <width>58</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="value">
+       <number>24</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_17">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>154</y>
+        <width>121</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Max, pair, hairpin</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_13">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>260</y>
+       <width>201</width>
+       <height>74</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Other</string>
+     </property>
+     <widget class="QCheckBox" name="primerGCClampCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>87</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>GC Clamp</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_18">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>24</y>
+        <width>120</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Max End Stability</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="primerMaxEndStabilitySpinBox">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>22</y>
+        <width>58</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>20</number>
+      </property>
+      <property name="value">
+       <number>8</number>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="runButton">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>510</y>
+     <width>115</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Run</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cancelButton">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>510</y>
+     <width>115</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>mononucCheckBox</tabstop>
+  <tabstop>mononucSpinBox</tabstop>
+  <tabstop>dinucCheckBox</tabstop>
+  <tabstop>dinucSpinBox</tabstop>
+  <tabstop>trinucCheckBox</tabstop>
+  <tabstop>trinucSpinBox</tabstop>
+  <tabstop>tetranucCheckBox</tabstop>
+  <tabstop>tetranucSpinBox</tabstop>
+  <tabstop>pentanucCheckBox</tabstop>
+  <tabstop>pentanucSpinBox</tabstop>
+  <tabstop>hexanucCheckBox</tabstop>
+  <tabstop>combineLociCheckBox</tabstop>
+  <tabstop>tagPrimersCheckBox</tabstop>
+  <tabstop>designPrimersCheckBox</tabstop>
+  <tabstop>pigtailPrimersCheckBox</tabstop>
+  <tabstop>cagTagCheckBox</tabstop>
+  <tabstop>m13rCheckBox</tabstop>
+  <tabstop>cancelButton</tabstop>
+  <tabstop>customTagLineEdit</tabstop>
+  <tabstop>repeatsCheckBox</tabstop>
+  <tabstop>combinedRepeatsCheckBox</tabstop>
+  <tabstop>primersCheckBox</tabstop>
+  <tabstop>taggedPrimersCheckBox</tabstop>
+  <tabstop>commaSeparatedRadioButton</tabstop>
+  <tabstop>tabDelimitedRadioButton</tabstop>
+  <tabstop>primerMinSizeSpinBox</tabstop>
+  <tabstop>primerOptSizeSpinBox</tabstop>
+  <tabstop>primerMaxSizeSpinBox</tabstop>
+  <tabstop>primerProductSizeTextBox</tabstop>
+  <tabstop>primerMinTmSpinBox</tabstop>
+  <tabstop>primerOptTmSpinBox</tabstop>
+  <tabstop>primerMaxTmSpinBox</tabstop>
+  <tabstop>perfectRepeatsCheckBox</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>runButton</tabstop>
+  <tabstop>customTagCheckBox</tabstop>
+  <tabstop>hexanucSpinBox</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>cancelButton</sender>
+   <signal>clicked()</signal>
+   <receiver>msatcommander</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>217</x>
+     <y>525</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>runButton</sender>
+   <signal>clicked()</signal>
+   <receiver>msatcommander</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>457</x>
+     <y>525</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>primersCheckBox</sender>
+   <signal>clicked()</signal>
+   <receiver>msatcommander</receiver>
+   <slot>checkPrimersOutput()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>398</x>
+     <y>251</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>taggedPrimersCheckBox</sender>
+   <signal>clicked()</signal>
+   <receiver>msatcommander</receiver>
+   <slot>checkTaggedPrimersOutput()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>398</x>
+     <y>271</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>combinedRepeatsCheckBox</sender>
+   <signal>clicked()</signal>
+   <receiver>msatcommander</receiver>
+   <slot>checkCombineRepeatsOutput()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>398</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>repeatsCheckBox</sender>
+   <signal>clicked()</signal>
+   <receiver>msatcommander</receiver>
+   <slot>checkRepeatsOutput()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>398</x>
+     <y>211</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>designPrimersCheckBox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>msatcommander</receiver>
+   <slot>clickDesignPrimersCheckBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>108</x>
+     <y>326</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>mononucCheckBox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>msatcommander</receiver>
+   <slot>clickRepeatsCheckBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>93</x>
+     <y>72</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tagPrimersCheckBox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>msatcommander</receiver>
+   <slot>clickTagPrimersCheckBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>108</x>
+     <y>346</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dinucCheckBox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>msatcommander</receiver>
+   <slot>clickRepeatsCheckBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>90</x>
+     <y>97</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>trinucCheckBox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>msatcommander</receiver>
+   <slot>clickRepeatsCheckBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>92</x>
+     <y>122</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tetranucCheckBox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>msatcommander</receiver>
+   <slot>clickRepeatsCheckBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>92</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pentanucCheckBox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>msatcommander</receiver>
+   <slot>clickRepeatsCheckBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>92</x>
+     <y>172</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>hexanucCheckBox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>msatcommander</receiver>
+   <slot>clickRepeatsCheckBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>92</x>
+     <y>197</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>combineLociCheckBox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>msatcommander</receiver>
+   <slot>clickCombineLociCheckBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>98</x>
+     <y>261</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>keepDbaseSequenceRecords</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>msatcommander</receiver>
+   <slot>checkKeepDatabaseCheckBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>403</x>
+     <y>276</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>keepDatabaseCheckBox</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>msatcommander</receiver>
+   <slot>clickKeepDatabaseCheckBox()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>373</x>
+     <y>258</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>260</x>
+     <y>272</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
