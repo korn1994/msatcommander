@@ -8,6 +8,6 @@
   
   * Rozen S, Skaletsky HJ (2000) Primer3 on the WWW for general users and for biologist programmers.  In: Bioinformatics Methods and Protocols: Methods in Molecular Biology (eds Krawetz S, Misener S).  Humana Press, Totowa, NJ.  
 
-  * Schable NA, Fischer RU, Glenn TC (2002) Tetranucleotide microsatellite DNA loci from the dollar sunfish (Lepomis marginatus).  Molecular Ecology Notes, 2, 509–511.
+  * Schable NA, Fischer RU, Glenn TC (2002) Tetranucleotide microsatellite DNA loci from the dollar sunfish (Lepomis marginatus).  Molecular Ecology Notes, 2, 509–511. doi:[http://dx.doi.org/10.1046/j.1471-8286.2002.00296.x 10.1046/j.1471-8286.2002.00296.x]
 
-   * Schuelke M (2000) An economic method for the fluorescent labeling of PCR fragments. Nat Biotechnol, 18, 233-234.
+   * Schuelke M (2000) An economic method for the fluorescent labeling of PCR fragments. Nat Biotechnol, 18, 233-234. doi:[http://dx.doi.org/10.1038/72708 10.1038/72708]
