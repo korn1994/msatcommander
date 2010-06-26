@@ -1,0 +1,22 @@
+#summary One-sentence summary of this page.
+
+= Getting the source =
+
+You can check out the source from the trunk using subversion
+
+`svn checkout http://msatcommander.googlecode.com/svn/trunk/ msatcommander`
+
+You can also check the code out from github (main development area):
+
+`git clone git://github.com/brantfaircloth/msatcommander.git`
+
+
+= Dependencies =
+
+Before running the code, you will likely need to install the following libraries.  The versions I use to build the OSX application are given in {x.y.z}.  Some of these packages (e.g. pysqlite) may not be necessary.  I've included them because I needed them to build a proper application bundle with Py2app.  YMMV:
+
+ * [http://qt.nokia.com/downloads The Qt libraries] for your distribution {4.6.3}
+ * [http://www.riverbankcomputing.co.uk/software/sip/download SIP] {4.10.2}
+ * [http://www.riverbankcomputing.co.uk/software/pyqt/download PyQt] {4.7.3}
+ * [http://biopython.org/wiki/Download biopython] {1.54]
+ * [http://trac.edgewall.org/wiki/PySqlite pysqlite2] {2.6.0}
