@@ -1,6 +1,19 @@
 #summary Changelog for msatcommander (formerly msatFinder)
 #labels Featured
 
+= 1.0.1 =
+ * fixed bug in locus combination code that returned an incorrect terminal position of a combined locus (i,e. it returned the start, instead).
+
+= 1.0.0 =
+ * replaced wxPython with Qt and PyQt
+ * replaced primer3 version 1 with the primer3 version2 which incorporates thermodynamics
+ * incorporated sqlite3 as a backend storage engine
+ * rewrote microsatellite locating code
+ * rewrote primer design code
+ * rewrote main GUI code (see first entry above)
+ * added ability to alter a number of primer design parameters
+ * should be fully functional on OSX 10.6 in 32 and 64 bit modes
+
 = 0.8.2 =
   * fixed issue with occasional improper treatment of overlapping bases btw. primer and tag
   * fixed issue with improper selection of repeat regions as primer binding sites using a custom mispriming file
