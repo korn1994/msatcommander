@@ -1,8 +1,12 @@
 #summary Changelog for msatcommander (formerly msatFinder)
 #labels Featured
 
+= 1.0.2 =
+ * fixed issue with combining loci and foreign keys
+ * fixed issue with incorrect amplicon size returned for tagged primers (thanks to T. Glenn for reporting)
+
 = 1.0.1 =
- * fixed bug in locus combination code that returned an incorrect terminal position of a combined locus (i,e. it returned the start, instead).
+ * fixed issue in locus combination code that returned an incorrect terminal position of a combined locus (i,e. it returned the start, instead of end).
 
 = 1.0.0 =
  * replaced wxPython with Qt and PyQt
