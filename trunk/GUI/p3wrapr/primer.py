@@ -21,7 +21,7 @@ import string
 import tempfile
 import unittest
 import subprocess
-#from PyQt4 import QtCore, QtGui 
+from PyQt4 import QtCore, QtGui 
 
 
 class Settings:
@@ -217,7 +217,6 @@ class Primers:
         except:
             print "Unexpected error:", sys.exc_info()[0]
             raise
-        #pdb.set_trace()
         if stdout:
             primers = {}
             stdout = stdout.split('\n')
@@ -373,6 +372,7 @@ class Primers:
                                 self.tagged_primers[k]['PRIMER_TAG_COMMON_BASES'] = self.tagged_common
                                 self.tagged_primers[k]['PRIMER_TAG'] = self.tagged_tag
                                 # cleanup is automatic in _p_design
+                                
                             else:
                                 l_untagged = self.primers[p]['PRIMER_LEFT_SEQUENCE']
                                 self.tagged_common, self.tagged_tag = self._common(kwargs[ts], self.primers[p]['PRIMER_RIGHT_SEQUENCE'])
@@ -385,6 +385,7 @@ class Primers:
                                 self.tagged_primers[k]['PRIMER_TAGGED'] = 'RIGHT'
                                 self.tagged_primers[k]['PRIMER_TAG_COMMON_BASES'] = self.tagged_common
                                 self.tagged_primers[k]['PRIMER_TAG'] = self.tagged_tag
+                            self.tagged_primers[k]['PRIMER_TAG_PRODUCT_SIZE'] = self.primers[p]['PRIMER_PAIR_PRODUCT_SIZE'] + len(self.tagged_tag)
             self._good()
             self._best()
             #QtCore.pyqtRemoveInputHook()
@@ -405,12 +406,18 @@ class Primers:
                         self.tagged_good[k]['PRIMER_PIGTAIL_TAG'] = \
                         self._common(pigtail, v['PRIMER_RIGHT_SEQUENCE'])
                     self.tagged_good[k]['PRIMER_RIGHT_SEQUENCE'] = self.tagged_good[k]['PRIMER_PIGTAIL_TAG'] + v['PRIMER_RIGHT_SEQUENCE']
+                    #QtCore.pyqtRemoveInputHook()
+                    #pdb.set_trace()
                 else:
+                    #QtCore.pyqtRemoveInputHook()
+                    #pdb.set_trace()
                     self.tagged_good[k]['PRIMER_PIGTAILED'] = 'LEFT'
                     self.tagged_good[k]['PRIMER_PIGTAIL_TAG_COMMON_BASES'], \
                         self.tagged_good[k]['PRIMER_PIGTAIL_TAG'] = \
                         self._common(pigtail, v['PRIMER_LEFT_SEQUENCE'])
                     self.tagged_good[k]['PRIMER_LEFT_SEQUENCE'] = self.tagged_good[k]['PRIMER_PIGTAIL_TAG'] + v['PRIMER_LEFT_SEQUENCE']
+                # update the size of the tagged primer + pigtail
+                self.tagged_good[k]['PRIMER_TAG_PRODUCT_SIZE'] += len(self.tagged_good[k]['PRIMER_PIGTAIL_TAG'])
         elif self.primers_designed:
             #from PyQt4 import QtCore
             #QtCore.pyqtRemoveInputHook()
