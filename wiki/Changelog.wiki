@@ -1,6 +1,11 @@
 #summary Changelog for msatcommander (formerly msatFinder)
 #labels Featured
 
+= 1.0.3 =
+ * bumped primer3_core to 2.2.3 (stable)
+ * fixed an issue with using improper tags for primer3 (doesn't affect primers previously designed)
+ * updated underlying p3wrapr/primer.py to take -strict_tags only (to prevent event above)
+
 = 1.0.2 =
  * fixed issue with combining loci and foreign keys
  * fixed issue with incorrect amplicon size returned for tagged primers (thanks to T. Glenn for reporting)
