@@ -1,6 +1,15 @@
 #summary Changelog for msatcommander (formerly msatFinder)
 #labels Featured
 
+= 1.0.4 =
+ * bumped python to 2.7
+ * bumped Qt, PyQT, SIP to current versions
+ * fixed an issue with the subversion trunk/source on unix-like OSs
+ * fixed an issue with the primer3 binary name by adding config file
+ * fixed an issue with foreign keys in sqlite
+ * fixed an issue where duplicate primers might be reported for certain loci (added visual indicator for user)
+ * rearranged directory structure to be more sensible
+
 = 1.0.3 =
  * bumped primer3_core to 2.2.3 (stable)
  * fixed an issue with using improper tags for primer3 (doesn't affect primers previously designed)
