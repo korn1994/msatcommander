@@ -21,15 +21,19 @@ import string
 import tempfile
 import unittest
 import subprocess
-from PyQt4 import QtCore, QtGui 
+try:
+    from PyQt4 import QtCore, QtGui
+except:
+    pass
 
 
 class Settings:
-    def __init__(self):
+    def __init__(self, binary = 'primer3_core'):
         '''set default primer3 params'''
         #pdb.set_trace()
         self.td = None
         self.params = {}
+        self.binary = binary
         # create temporary directory
         if not self.td or not os.path.isdir(self.td):
             self.td = tempfile.mkdtemp(prefix='py-primer3-', suffix='')
@@ -58,18 +62,19 @@ class Settings:
 
     def _mispriming(self):
         self.params['PRIMER_MISPRIMING_LIBRARY']        = 'misprime_lib_weight'
-        self.params['PRIMER_MAX_MISPRIMING']            = 7.00
+        self.params['PRIMER_MAX_LIBRARY_MISPRIMING']    = 7.00
     
     def _basic(self, path):
         # basic parameters for primer checking
-        self.params['PRIMER_TM_SANTALUCIA']             = 1     # boolean
-        self.params['PRIMER_SALT_CONC']                 = 50.0  # mM
-        self.params['PRIMER_DIVALENT_CONC']             = 1.5   # mM
+        self.params['PRIMER_TM_FORMULA']                = 1     # boolean
         self.params['PRIMER_SALT_CORRECTIONS']          = 1     # boolean
+        self.params['PRIMER_SALT_MONOVALENT']           = 50.0  # mM
+        self.params['PRIMER_SALT_DIVALENT']             = 1.5   # mM
+        
         self.params['PRIMER_DNTP_CONC']                 = 0.125 # mM
         self.params['PRIMER_THERMODYNAMIC_ALIGNMENT']   = 1
         if not path:
-            self.params['PRIMER_THERMODYNAMIC_PARAMETERS_PATH']    = os.path.join(os.path.dirname(self._which('primer3_core')), 'primer3_config/')
+            self.params['PRIMER_THERMODYNAMIC_PARAMETERS_PATH']    = os.path.join(os.path.dirname(self._which(self.binary)), 'primer3_config/')
         else:
             self.params['PRIMER_THERMODYNAMIC_PARAMETERS_PATH']    = path
         self.params['PRIMER_MAX_POLY_X']                = 3     # nt
@@ -81,7 +86,7 @@ class Settings:
         self.params['PRIMER_MIN_TM']                    = 57.   # deg C
         self.params['PRIMER_MAX_TM']                    = 62.   # deg C
         self.params['PRIMER_OPT_TM']                    = 60.   # deg C
-        self.params['PRIMER_MAX_DIFF_TM']               = 5.    # deg C
+        self.params['PRIMER_PAIR_MAX_DIFF_TM']          = 5.    # deg C
         self.params['PRIMER_OPT_SIZE']                  = 19    # nt
         self.params['PRIMER_MIN_SIZE']                  = 16    # nt
         self.params['PRIMER_MIN_GC']                    = 30.0  # percent
@@ -92,8 +97,8 @@ class Settings:
         self.params['PRIMER_PAIR_MAX_COMPL_ANY_TH']     = 45.   # deg C
         self.params['PRIMER_MAX_SELF_END_TH']           = 40.   # deg C
         self.params['PRIMER_PAIR_MAX_COMPL_END_TH']     = 40.   # deg C
-        self.params['PRIMER_MAX_HAIRPIN']               = 24.   # deg C
-        self.params['PRIMER_PAIR_MAX_HAIRPIN']          = 24.   # deg C
+        self.params['PRIMER_MAX_HAIRPIN_TH']            = 24.   # deg C
+        self.params['PRIMER_PAIR_MAX_HAIRPIN_TH']       = 24.   # deg C
         self.params['PRIMER_MAX_END_STABILITY']         = 8.0   # delta G
         self.params['PRIMER_LOWERCASE_MASKING']         = 1     # avoids 3' mask
         self.params['PRIMER_NUM_RETURN']                = 4     # count
@@ -204,7 +209,7 @@ class Primers:
         #QtCore.pyqtRemoveInputHook()
         #pdb.set_trace()
         try:
-            stdout,stderr = subprocess.Popen('%s %s' % (self.binary, self.tf),\
+            stdout,stderr = subprocess.Popen('%s -strict_tags %s' % (self.binary, self.tf),\
             shell=True, stdout=subprocess.PIPE, stdin=None, \
             stderr=subprocess.PIPE, universal_newlines=True).communicate()
         except OSError, e:
@@ -217,6 +222,16 @@ class Primers:
         except:
             print "Unexpected error:", sys.exc_info()[0]
             raise
+        #pdb.set_trace()
+        if stderr != '':
+            stderr = stderr.split('\n')
+            for l in stderr:
+                try:
+                    name, val = l.split('=')
+                    if name == 'PRIMER_ERROR':
+                        raise ValueError, val
+                except:
+                    raise ValueError, "Cannot parse primer3 stderr. Ensure primer3 binary is installed."
         if stdout:
             primers = {}
             stdout = stdout.split('\n')
@@ -227,7 +242,7 @@ class Primers:
                         val = float(val)
                     except ValueError:
                         pass
-                    if name in ['PRIMER_LEFT_EXPLAIN', 
+                    if name in ['PRIMER_LEFT_EXPLAIN', 'PRIMER_SALT_DIVALENT',
                     'PRIMER_RIGHT_EXPLAIN', 'PRIMER_PAIR_EXPLAIN']:
                         if 'metadata' not in primers.keys():
                             primers['metadata'] = {name:val}
@@ -240,7 +255,8 @@ class Primers:
                             primers[k] = {name:val}
                         else:
                             primers[k][name] = val
-                except:
+                except (ValueError, IndexError):
+                    # skip a bunch of additional metadata stuff we don't need
                     pass
         else:
             primers = None
@@ -394,7 +410,65 @@ class Primers:
             self.tagged_primers = None
             self.tagged_best = None
     
-            
+    def dtag(self, tagging, delete=True, **kwargs):
+        '''tag and check newly designed primers'''
+        if self.primers_designed:
+            self.tagging = tagging
+            self.tagged_primers = {}
+            #pdb.set_trace()
+            primers = self.primers.keys()
+            primers.remove('metadata')
+            for p in primers:
+                for ts in kwargs:
+                    if kwargs[ts]:
+                        self.tagged_l_common, self.tagged_l_tag = self._common(kwargs[ts], self.primers[p]['PRIMER_LEFT_SEQUENCE'])
+                        l_tagged = self.tagged_l_tag + self.primers[p]['PRIMER_LEFT_SEQUENCE']
+                        self.tagged_r_common, self.tagged_r_tag = self._common(kwargs[ts], self.primers[p]['PRIMER_RIGHT_SEQUENCE'])
+                        r_tagged = self.tagged_r_tag + self.primers[p]['PRIMER_RIGHT_SEQUENCE']
+                        # reinitialize with reduced set of Primer3Params
+                        self._locals(self.tagging, left_primer=l_tagged, right_primer=r_tagged, name='tagging')
+                        k = '%s_%s_%s' % (p, ts, 'f')
+                        self.tagged_primers[k] = self._p_design()[0]
+                        self.tagged_primers[k]['PRIMER_TAGGED'] = 'BOTH'
+                        self.tagged_primers[k]['PRIMER_LEFT_TAG_COMMON_BASES'] = self.tagged_l_common
+                        self.tagged_primers[k]['PRIMER_RIGHT_TAG_COMMON_BASES'] = self.tagged_r_common
+                        self.tagged_primers[k]['PRIMER_LEFT_TAG'] = self.tagged_l_tag
+                        self.tagged_primers[k]['PRIMER_RIGHT_TAG'] = self.tagged_r_tag
+            #if len(self.tagged_primers) > 1:
+            self._good()
+            self._best()
+            #else:
+                
+            #QtCore.pyqtRemoveInputHook()
+            #pdb.set_trace()
+        else:
+            self.tagged_primers = None
+            self.tagged_best = None
+    
+    def check(self, tagging, delete=True, **kwargs):
+        '''check primers designed elsewhere'''
+        if self.primers_designed:
+            self.tagging = tagging
+            self.checked_primers = {}
+            #pdb.set_trace()
+            primers = self.primers.keys()
+            primers.remove('metadata')
+            for p in primers:
+                # reinitialize with reduced set of Primer3Params
+                self._locals(self.tagging, left_primer=self.primers[p]['PRIMER_LEFT_SEQUENCE'], right_primer=self.primers[p]['PRIMER_RIGHT_SEQUENCE'], name='checking')
+                self.checked_primers[p] = self._p_design()[0]
+                self.checked_primers[p]['PRIMER_TAGGED'] = 'NONE'
+            #if len(self.tagged_primers) > 1:
+            # self._good()
+            # self._best()
+            #else:
+
+            #QtCore.pyqtRemoveInputHook()
+            #pdb.set_trace()
+        else:
+            self.tagged_primers = None
+            self.tagged_best = None
+
     def pigtail(self, tagging, pigtail = 'GTTT'):
         '''Add pigtail to untagged primer of tagged pair'''
         if self.tagged_good:

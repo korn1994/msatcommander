@@ -38,12 +38,12 @@ except:
     pass
 print 'Building app...'
 
-VER = '1.0.1-alpha'
+VER = '1.0.4-beta'
 NAME = 'msatcommander'
 APPNAME = '%s-%s' % (NAME, VER)
 FULLAPPNAME = '%s.app' % APPNAME
 AUTHOR = 'Brant Faircloth'
-YEAR = 2010
+YEAR = 2011
 
 PLIST = dict(CFBundleName = APPNAME,
              CFBundleShortVersionString = VER,
@@ -67,9 +67,9 @@ if os.name == 'posix':
         license='GPL',
         app=['main.py'],
         setup_requires=["py2app"],
-        data_files=[
-            ('msat', ['/Users/bcf/git/brant/modules/msat/__init__.py','/Users/bcf/git/brant/modules/msat/motif.py','/Users/bcf/git/brant/modules/msat/seqsearch.py']),
-            ('p3wrapr', ['/Users/bcf/git/brant/modules/p3wrapr/__init__.py','/Users/bcf/git/brant/modules/p3wrapr/primer.py']),
+	data_files=[
+            ('msat', ['msat/__init__.py','msat/motif.py','msat/seqsearch.py','msat/finder.py']),
+            ('p3wrapr', ['p3wrapr/__init__.py','p3wrapr/primer.py']),
         ],
         options=dict(py2app=dict(
                 includes=['Bio.SeqIO',
@@ -77,14 +77,16 @@ if os.name == 'posix':
                             'PyQt4.QtCore',
                             'PyQt4.QtGui',
                             'sip',
-                            'shutil'],
+                            ],
                 plist = PLIST,
                 packages=[],
                 iconfile='icon/mc.icns',
-                resources=['primer3_core',
+                resources=[ 'qt.conf',
+                            'msatcommander.conf',
                             'misprime_lib_weight',
-                            'primer3_config',
-                            'qt.conf'],
+                            '../mod-primer3/src/primer3_long',
+                            '../mod-primer3/src/primer3_config',
+                            ],
                 excludes=[  'Bio.Genbank',
                             'modules.p3wrapr',
                             'modules.msat',
@@ -105,8 +107,8 @@ if os.name == 'posix':
     )
     ## post-flight
     # make primer3 core executable
-    print '\n\nSetting primer3_core to executable...'
-    os.chmod(os.path.join(INNARDS, 'Resources','primer3_core'), 0755)
+    print '\n\nSetting primer3_long to executable...'
+    os.chmod(os.path.join(INNARDS, 'Resources','primer3_long'), 0755)
     print 'Removing QtCore_debug and QtGui_debug...'
     for p in [  ( "Frameworks", "QtGui.framework", "Versions", "4", "QtGui_debug" ),
                 ( "Frameworks", "QtGui.framework", "QtGui_debug"),
