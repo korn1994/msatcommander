@@ -4,7 +4,8 @@
 = 1.0.4 =
  * bumped python to 2.7
  * bumped Qt, PyQT, SIP to current versions
- * fixed an issue with the subversion trunk/source on unix-like OSs
+ * fixed an issue designing primers from *large* contigs
+ * fixed an issue with the subversion trunk/source on unix-like OSs (issue #24)
  * fixed an issue with the primer3 binary name by adding config file
  * fixed an issue with foreign keys in sqlite
  * fixed an issue where duplicate primers might be reported for certain loci (added visual indicator for user)
