@@ -1,6 +1,9 @@
 #summary Changelog for msatcommander (formerly msatFinder)
 #labels Featured
 
+= 1.0.5 =
+ * fixed an issue with duplicate primer reporting in certain cases (thanks to Jarek Bryk) (issue #25)
+
 = 1.0.4 =
  * bumped python to 2.7
  * bumped Qt, PyQT, SIP to current versions
