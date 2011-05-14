@@ -1,6 +1,10 @@
 #summary Changelog for msatcommander (formerly msatFinder)
 #labels Featured
 
+= 1.0.6 =
+ * fixed an issue w/ the combining loci returning too few loci in certain circumstances (issue #26)
+ * fixed an issue (hopefully) with the build not running on some OSX machines
+
 = 1.0.5 =
  * fixed an issue with duplicate primer reporting in certain cases (thanks to Jarek Bryk) (issue #25)
 
