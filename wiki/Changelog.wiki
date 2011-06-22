@@ -5,7 +5,7 @@
  * fixed an error that caused program to hang when only searching for microsatellites (thanks to Travis Glenn)
 
 = 1.0.7 =
- * added *.fna files as allowable input
+ * added `*`.fna files as allowable input
 
 = 1.0.6 =
  * fixed an issue w/ the combining loci returning too few loci in certain circumstances (issue #26)
